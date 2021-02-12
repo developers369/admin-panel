@@ -1,0 +1,13 @@
+$btn-color : rgb(48, 48, 122);
+
+button{
+    padding: 5px 14px;
+    background-color: $btn-color;
+    border: none;
+    color: white;
+    width: 100%;
+    border-radius: 24px;
+    height: 40px;
+    cursor: pointer;
+}
+

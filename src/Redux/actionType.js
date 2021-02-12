@@ -1,0 +1,6 @@
+export const LOGIN = "LOGIN"
+export const UPDATE_PROFILE = "UPDATE_PROFILE"
+export const ADD_USER = "ADD_USER"
+export const UPDATE_USER = "UPDATE_USER"
+export const DELETE_USER = "DELETE_USER"
+export const DELETE_USERS = "DELETE_USERS"

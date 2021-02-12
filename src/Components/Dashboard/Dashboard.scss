@@ -1,0 +1,39 @@
+.admin-panel{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .left{
+    display: flex;
+    width: 15%; 
+    background-color: rgb(180, 175, 175);
+  
+  
+    .nav-div{
+      width: 100%;
+      height: 100vh;
+    }
+  }
+  
+  .right{
+  
+    width: 85%;
+    display: inline-block;
+    .headerbar-div{
+      width : 100%;
+      height: 50px; 
+      background-color: rgb(119, 93, 93);
+    }
+  }
+
+  .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 91vh;
+    width: 100%;
+    padding: 50px;
+  }
+  
+  

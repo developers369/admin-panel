@@ -1,0 +1,43 @@
+.action-btn-container{
+    display: flex;
+    align-items: center;
+}
+
+.user-action-btn-div{
+    width: 30px;
+    height: 35px;
+    margin-right: 5px;
+
+    i{
+        position: absolute;
+        padding-left: 9px;
+        font-size: 14px !important;
+        padding-top: 7px;
+        color: white;
+    }
+}
+
+.user-action-btn-checkbox{
+    width: 28px;
+    height: 28px;
+    margin-right: 5px;
+    border-radius: 10px;
+    margin-top: -3px;
+    padding-left: 8px;
+    padding-top: 2px;
+}
+
+.user-action-button-edit{
+    width: 20px;
+    height: 30px;
+    background-color: rgb(45, 58, 231);
+    border-radius: 10px;
+}
+
+.user-action-button-delete{
+    width: 20px;
+    height: 30px;
+    background-color: rgb(212, 44, 44);
+    border-radius: 10px;
+}
+
