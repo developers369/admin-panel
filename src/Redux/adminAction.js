@@ -1,4 +1,4 @@
-import {LOGIN, UPDATE_PROFILE, ADD_USER, UPDATE_USER, DELETE_USER, DELETE_USERS} from './actionType'
+import {LOGIN, UPDATE_PROFILE, ADD_USER, UPDATE_USER, DELETE_USER, DELETE_USERS, CHANGE_STATUS, FETCH_USERS} from './actionType'
 
 export function login(userName, password){
     // console.log(userName);
@@ -24,21 +24,22 @@ export function updateProfile(fullName, email, profileImg){
 }
 
 
-export function addUser(fullName, salary, email, contact){
-   
+export function addUser(fullName, salary, email, contact, avatar){
+    console.log(avatar);
     return{
         type: ADD_USER,
         payload: {
             fullName,
             salary,
             email,
-            contact
+            contact,
+            avatar
         }
     }
 }
 
 
-export function updateUser(updateId, fullName, salary, email, contact){
+export function updateUser(updateId, fullName, salary, email, contact, avatar){
     
     return{
         type: UPDATE_USER,
@@ -47,7 +48,8 @@ export function updateUser(updateId, fullName, salary, email, contact){
             fullName,
             salary,
             email,
-            contact
+            contact,
+            avatar
         }
     }
 }
@@ -68,3 +70,17 @@ export function deleteUsers(deletedIdArray){
     }
 }
 
+export function changeStatus(id){
+    // console.log(deleteId);
+    return{
+        type: CHANGE_STATUS,
+        payload: id
+    }
+}
+
+export function fetchUsers(fullName, salary, email, contact, avatar){
+    console.log(avatar);
+    return{
+        type: FETCH_USERS,
+    }
+}

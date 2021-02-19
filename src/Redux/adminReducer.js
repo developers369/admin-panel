@@ -1,7 +1,8 @@
-import {LOGIN, UPDATE_PROFILE, ADD_USER, UPDATE_USER, DELETE_USER, DELETE_USERS} from './actionType'
+import {LOGIN, UPDATE_PROFILE, ADD_USER, UPDATE_USER, DELETE_USER, DELETE_USERS, CHANGE_STATUS, FETCH_USERS} from './actionType'
 import profileImg from '../Image/download.png'
 
 let ID = 0
+
 
 const intialState = {
     admin : {
@@ -51,16 +52,22 @@ export const adminReducer = (state = intialState, action) => {
 
 
         case ADD_USER:
-           
+            
+            var today = new Date(),
+            date = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+            console.log(date);
             let stringId = ++ID
             const user = {
                 ID: stringId.toString(),
                 fullName: action.payload.fullName,
                 email: action.payload.email,
                 salary: action.payload.salary,
-                contact: action.payload.contact
+                contact: action.payload.contact,
+                avatar: action.payload.avatar,
+                status: true,
+                createdDate: date
             }
-            
+
             return{
                 ...state,
                 users: [...state.users, user]
@@ -79,9 +86,19 @@ export const adminReducer = (state = intialState, action) => {
             })
 
             console.log("index=", ind)
+            const updateUser = {
+                ID: action.payload.updateId,
+                fullName: action.payload.fullName,
+                email: action.payload.email,
+                salary: action.payload.salary,
+                contact: action.payload.contact,
+                avatar: action.payload.avatar,
+                status: state.users[ind].status,
+                createdDate: state.users[ind].createdDate
+            }
             //console.log("array=", state.users.splice(ind, 1, action.payload))
             let temp = state.users
-            temp.splice(ind, 1, action.payload)
+            temp.splice(ind, 1, updateUser)
             return{
                ...state,
                users: temp
@@ -109,6 +126,46 @@ export const adminReducer = (state = intialState, action) => {
             return{
                 ...state,
                 users: tempArray
+            }
+
+
+        case CHANGE_STATUS:
+
+            let index
+
+            state.users.map((user, ind) => {
+                if(user.ID === action.payload){
+                    index = ind
+                }
+                return{
+
+                }
+            })
+
+            let tempA = [...state.users]
+           
+
+            if(tempA[index].status)
+                tempA[index].status = false
+            else
+                tempA[index].status = true
+
+            console.log("old",state.users);
+            console.log("updated",tempA);
+            console.log("state changed", tempA[index]);
+            return{
+                ...state,
+                users: tempA
+            }
+
+
+        case FETCH_USERS:
+
+            let users = JSON.parse(localStorage.getItem("users"))
+            console.log(users)
+            return{
+                ...state,
+                users
             }
 
         default : return state

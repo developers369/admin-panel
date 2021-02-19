@@ -2,38 +2,50 @@
     display: flex;
     width: 100%;
     height: 100vh;
-  }
+}
   
   .left{
     display: flex;
     width: 15%; 
-    background-color: rgb(180, 175, 175);
-  
-  
+    background-color: #7E7F89;
+    
     .nav-div{
-      width: 100%;
-      height: 100vh;
+      position: fixed;
+      width: 15%;
     }
   }
   
   .right{
-  
+
+    display: flex;
+    flex-direction: column;
     width: 85%;
-    display: inline-block;
+
+    
     .headerbar-div{
-      width : 100%;
-      height: 50px; 
-      background-color: rgb(119, 93, 93);
+      padding-right: 10px;
+      background-color:#7E7F89;
     }
   }
 
-  .container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 91vh;
+  .dashboard-container{
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
     width: 100%;
-    padding: 50px;
+    overflow-y: scroll;
+  }
+  
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  .dashboard-container{
+    padding: 0px !important;
   }
   
   
+}

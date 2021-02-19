@@ -1,0 +1,289 @@
+.profile-div {
+  background-color: #CCC;
+  border-radius: 24px;
+  width: 70%;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.profile-form {
+  width: 70%;
+  display: block;
+}
+
+.profile-button-div {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.profile-form .form-items {
+  padding-top: 15px;
+}
+
+.profile-form .form-items i {
+  position: absolute;
+  padding-left: 10px;
+  padding-top: 18px;
+  font-size: 13px;
+}
+
+.profile-button-div {
+  padding-top: 20px;
+}
+
+.profile-action-button {
+  font-size: 20px;
+  background-color: #6565bb;
+  color: white;
+  width: 60%;
+}
+
+.profile-action-button:hover {
+  background-color: #4343b4;
+}
+
+.cancel {
+  margin-left: 30px;
+}
+
+.inputTagFile {
+  padding-top: 5px;
+  padding-left: 0px;
+}
+
+.label-profile-img {
+  margin-bottom: 3px !important;
+}
+
+.crop-modal {
+  clear: both;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  /* Modal Content */
+  /* Add Animation */
+  /* The Close Button */
+}
+
+.crop-modal .modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+.crop-modal .modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 40%;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.crop-modal .close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.crop-modal .close:hover,
+.crop-modal .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.crop-modal .modal-header {
+  padding: 2px 16px;
+  color: black;
+  font-size: 22px;
+}
+
+.crop-modal .modal-body {
+  padding: 2px 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.crop-modal .modal-footer {
+  padding: 2px 16px;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.crop-modal .footer-btn .footer-crop {
+  background-color: #30e648;
+  width: 120px;
+  margin-right: 15px;
+}
+
+.crop-modal .footer-btn .footer-crop:hover {
+  background-color: #0fa723;
+}
+
+.crop-modal .footer-btn .footer-cancel {
+  background-color: #cac7c7;
+  width: 120px;
+}
+
+.crop-modal .footer-btn .footer-cancel:hover {
+  background-color: #8a8888;
+}
+
+.ReactCrop {
+  height: 300px !important;
+  width: 100% !important;
+}
+
+.ReactCrop div {
+  height: 300px !important;
+}
+
+.ReactCrop .ReactCrop__image {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  .profile-div {
+    margin-top: 10px !important;
+    width: 80% !important;
+  }
+  .profile-div .profile-form {
+    width: 82% !important;
+  }
+  .profile-div .profile-form h2 {
+    font-size: 22px !important;
+  }
+  .profile-div #popUpModal .modal-content {
+    width: 80% !important;
+  }
+  .profile-div .container aside {
+    margin-top: 8px !important;
+  }
+  .profile-div .container aside div {
+    width: 90px !important;
+    height: 100px !important;
+    margin-left: 5px !important;
+  }
+  .profile-div .container aside div div img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  /* CSS */
+  .profile-div {
+    margin-top: 10px !important;
+    width: 80% !important;
+  }
+  .profile-div .profile-form {
+    width: 82% !important;
+  }
+  .profile-div .profile-form h2 {
+    font-size: 22px !important;
+  }
+  .profile-div #popUpModal .modal-content {
+    width: 80% !important;
+  }
+  .profile-div .container aside {
+    margin-top: 8px !important;
+  }
+  .profile-div .container aside div {
+    width: 90px !important;
+    height: 100px !important;
+    margin-left: 5px !important;
+  }
+  .profile-div .container aside div div img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+/*# sourceMappingURL=Profile.css.map */

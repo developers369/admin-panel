@@ -1,0 +1,67 @@
+.headerbar {
+  float: right;
+}
+
+.headerbar .headerbar-img {
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+}
+
+.headerbar .headerbar-img img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.log-out {
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  margin-top: 50px;
+  background-color: white;
+  display: none;
+  width: 120px;
+  padding: 10px;
+  position: absolute;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border-radius: 5px;
+  background-color: #dedada;
+}
+
+.showDiv:hover {
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.showDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.btn-log-out {
+  background-color: white;
+}
+
+.uname-pic {
+  padding: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background-color: burlywood;
+}
+/*# sourceMappingURL=Headerbar.css.map */

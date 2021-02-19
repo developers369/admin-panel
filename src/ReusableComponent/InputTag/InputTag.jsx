@@ -12,7 +12,18 @@ class InputTag extends Component {
     
     render() {
         return (
-            <input className={this.props.inputClass} type={this.props.type} value={this.props.inputText} placeholder={this.props.placeHolder} onChange={this.props.onChange} disabled={this.props.disabled}></input>
+            <input
+                id={this.props.id} 
+                className={this.props.inputClass} 
+                type={this.props.type} 
+                value={this.props.inputText} 
+                placeholder={this.props.placeHolder} 
+                onChange={this.props.onChange} 
+                disabled={this.props.disabled} 
+                onClick={this.props.onClick}
+                name={this.props.name}
+            />
+           
         );
     }
 }

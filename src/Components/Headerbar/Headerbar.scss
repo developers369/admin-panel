@@ -1,35 +1,34 @@
 
-.headerbar{
-    display: flex;
-    align-items: center;
-    float: right;
-    padding: 5px;
-}
-
 // .search-container{
 //     margin-right: 10px;
 // }
+.headerbar{
 
-.headerbar-img{
-    width: 40px;
-    height: 40px;
+    float: right;
 
-    img{
-        width: 100%;
-        height: auto;
-        border-radius: 50%;
+    .headerbar-img{
+        width: 50px;
+        height: 50px;
+        padding: 5px;
+
+        img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
     }
 }
 
 .log-out{
-    z-index: 100;
+    position: absolute;
+    right: 0;
+    z-index: 10;
     margin-top: 50px;
     background-color: white;
     display: none;
     width: 120px;
-    position: absolute;
-    right: 0px;
     padding: 10px;
+    position: absolute;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;

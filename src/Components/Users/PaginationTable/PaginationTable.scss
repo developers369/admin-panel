@@ -1,12 +1,15 @@
 .action-btn-container{
     display: flex;
     align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .user-action-btn-div{
     width: 30px;
     height: 35px;
     margin-right: 5px;
+    cursor: pointer;
 
     i{
         position: absolute;
@@ -25,6 +28,7 @@
     margin-top: -3px;
     padding-left: 8px;
     padding-top: 2px;
+
 }
 
 .user-action-button-edit{
@@ -32,6 +36,7 @@
     height: 30px;
     background-color: rgb(45, 58, 231);
     border-radius: 10px;
+    
 }
 
 .user-action-button-delete{
@@ -39,5 +44,15 @@
     height: 30px;
     background-color: rgb(212, 44, 44);
     border-radius: 10px;
+    
 }
 
+.table{
+
+    th{
+        text-align: center;
+    }
+    td{
+        text-align: center;
+    }
+}

@@ -25,21 +25,21 @@ class SalaryChart extends Component {
                     salary: salaryArray[i]
                 })
             }
-            console.log(data)
+            // console.log(data)
             this.setState({data: data})
         }
     }
 
     render() { 
-        console.log(userNames);
+        // console.log(userNames);
         return ( 
              
-            <BarChart width={600} height={300} data={this.state.data} >
+            <BarChart width={400} height={250} data={this.state.data} >
                 <CartesianGrid />
                 <XAxis dataKey={"userName"}/>
                 <YAxis />
                 <Tooltip/>
-                <Bar dataKey={"salary"} fill="rgb(219, 157, 113)"/>
+                <Bar dataKey={"salary"} fill="#708799"/>
 
             </BarChart>
             

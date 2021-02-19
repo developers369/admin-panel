@@ -5,10 +5,13 @@ import "./AddUpdateUser.scss"
 import { withCookies, Cookies} from 'react-cookie'
 import { instanceOf } from 'prop-types';
 import {connect} from 'react-redux'
-import { addUser, updateUser } from '../../Redux/adminAction';
+import { addUser, fetchUsers, updateUser } from '../../Redux/adminAction';
 import { Link } from 'react-router-dom';
+import Previews from '../../Dropzone';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/lib/ReactCrop.scss';
 
-let fullName, salary, email, contact
+let fullName, salary, email, contact, avatar
 let updateAuthorId
 
 class AddUpdateUser extends Component {
@@ -19,12 +22,18 @@ class AddUpdateUser extends Component {
     
     constructor(props) {
         super(props);
-        console.log(props);
+        //console.log(props);
         this.state = { 
             fullName: "",
             salary: "",
             email: "",
-            contact: ""
+            contact: "",
+            avatar: null,
+            profileImg: null,
+            image: null,
+            crop: {
+                aspect: 16/9
+            }
          }
     }
 
@@ -38,7 +47,8 @@ class AddUpdateUser extends Component {
     }
     
 
-    componentDidMount(){
+    async componentDidMount(){
+        await this.props.fetchUsers()
         if(this.props.match.params.id){
             // console.log("id exist");
             // console.log("array",this.props.users.filter(user => user.authorId === this.props.match.params.id))
@@ -49,7 +59,8 @@ class AddUpdateUser extends Component {
                 fullName : updateAuth[0].fullName,
                 salary : updateAuth[0].salary,
                 email : updateAuth[0].email,
-                contact : updateAuth[0].contact
+                contact : updateAuth[0].contact,
+                avatar: updateAuth[0].avatar
             })
             
         }
@@ -60,6 +71,8 @@ class AddUpdateUser extends Component {
         salary = this.state.salary
         email = this.state.email
         contact = this.state.contact
+        //console.log(this.state.avatar);
+        avatar = this.state.avatar
     }
 
     handleChange = (e, text) => {
@@ -84,7 +97,7 @@ class AddUpdateUser extends Component {
 
     handleClick = (e) => {
        
-        if(this.state.fullName === "" || this.state.salary === "" || this.state.email === "" || this.state.contact === null){
+        if(this.state.fullName === "" || this.state.salary === "" || this.state.email === "" || this.state.contact === null || this.state.avatar === null){
             if(this.state.fullName === ""){
                 alert("Please enter fullName")
             }
@@ -100,12 +113,18 @@ class AddUpdateUser extends Component {
             else if(this.state.contact === null){
                 alert("Please enter contact")
             }
+
+
+            else if(this.state.avatar === null){
+                alert("Please upload user avatar")
+            }
         }else{
 
             if(this.props.match.params.id){
                 updateAuthorId = this.props.match.params.id
+                console.log(this.state.avatar);
                 this.props.updateUser()
-               
+                
                 alert("Updated Successfully")
                 
                 this.props.history.push("/dashboard/dashboard-content/users");
@@ -117,7 +136,8 @@ class AddUpdateUser extends Component {
                         fullName: "",
                         salary: "",
                         email: "",
-                        contact: ""
+                        contact: "",
+                        avatar: null
                     }
                 })
                 
@@ -130,13 +150,67 @@ class AddUpdateUser extends Component {
         e.preventDefault()
     }
 
-    render() { 
-        console.log(this.props.match);
-        return ( 
+    handleFile = (filePreview) => {
+        console.log("show popup......",filePreview);
+        this.setState({profileImg: filePreview})
+        document.getElementById("popUpModal").style.display="block"
+    }
 
+    onLoad = (image) => {
+        this.setState({image: image})
+    }
+
+    handleCrop = (crop) => {
+        this.setState({crop : crop})
+    }
+
+
+    makeCrop = () => {
+        //alert("hello")
+        const canvas = document.createElement('canvas');
+        const scaleX = this.state.image.naturalWidth /  this.state.image.width;
+        const scaleY =  this.state.image.naturalHeight /  this.state.image.height;
+        canvas.width =  this.state.crop.width;
+        canvas.height =  this.state.crop.height;
+        const ctx = canvas.getContext('2d');
+       
+        ctx.drawImage(
+            this.state.image,
+            this.state.crop.x * scaleX,
+            this.state.crop.y * scaleY,
+            this.state.crop.width * scaleX,
+            this.state.crop.height * scaleY,
+            0,
+            0,
+            this.state.crop.width,
+            this.state.crop.height,
+        );
+
+        // this.setState({cropImage: canvas.toDataURL("image/jpeg")})
+        if(this.state.crop.x === 0){
+            console.log("withoutCrop...",this.state.profileImg);
+            this.setState({avatar: this.state.profileImg})
+        }else{
+            this.setState({avatar: canvas.toDataURL("image/jpeg")})
+            this.setState({crop: ""})
+        }
+        document.getElementById("popUpModal").style.display="none"
+    }
+
+    handleCancel = () => {
+        //alert("Hello")
+        document.getElementById("popUpModal").style.display="none"
+        // this.setState({avatar: this.state.profileImg})
+    }
+
+
+    render() { 
+        //console.log(this.state.avatar);
+        return ( 
+            <>
             <div className="form-div">
                 <form className="add-author-form">
-                    <h2>{ this.props.match.params.id ? "Update Author" : "Add Author"}</h2>
+                    <h2>{ this.props.match.params.id ? "Update User" : "Add User"}</h2>
 
                     <div className="form-items">
                         <label>Name</label> <br></br>
@@ -191,6 +265,13 @@ class AddUpdateUser extends Component {
                         />
                     </div>
 
+                    <div className="form-items">
+                        <Previews 
+                            passFile={this.handleFile} 
+                            cropImage={this.state.avatar}
+                        />
+                    </div>
+
                     <div className="button-div">
 
                         <Button
@@ -209,12 +290,50 @@ class AddUpdateUser extends Component {
                         
                     </div>
                 </form>
+
+                
+                    
             </div>
+
+
+            
+            <div id="popUpModal" className="modalCrop">
+
+            <div className="modal-content">
+                <div className="modal-header">
+                    
+                    <p>Crop Image</p>
+                    <span className="close" onClick={this.handleCancel}>&times;</span>
+                </div>
+                <div className="modal-body">
+                    <ReactCrop src={this.state.profileImg} onImageLoaded={this.onLoad} crop={this.state.crop} onChange={this.handleCrop} />
+                </div>
+                <div className="modal-footer">
+                    <div className="footer-btn">
+                        <Button
+                            btnclass="footer-crop"
+                            btnName="Crop Image"
+                            onClick={this.makeCrop}
+                        />
+
+                        <Button
+                            btnclass="footer-cancel"
+                            btnName="Cancel"
+                            onClick={this.handleCancel}
+                        />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            </>
+
          );
     }
 }
 
 const mapStateToProps = state => {
+    localStorage.setItem("users", JSON.stringify(state.users))
     return{
         users: state.users
     }
@@ -222,8 +341,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        addUser: () => dispatch(addUser(fullName, salary, email, contact)),
-        updateUser: () => dispatch(updateUser(updateAuthorId, fullName, salary, email, contact))
+        addUser: () => dispatch(addUser(fullName, salary, email, contact, avatar)),
+        updateUser: () => dispatch(updateUser(updateAuthorId, fullName, salary, email, contact, avatar)),
+        fetchUsers: () => dispatch(fetchUsers(fetchUsers))
     }
 }
 

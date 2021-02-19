@@ -3,12 +3,13 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import './Users.scss'
 import Button from '../../ReusableComponent/Button/';
-import {deleteUser, deleteUsers} from '../../Redux/adminAction'
+import {changeStatus, deleteUser, deleteUsers, fetchUsers} from '../../Redux/adminAction'
 import {withCookies, Cookies } from 'react-cookie'
 import {instanceOf} from 'prop-types'
 import PaginationTable from './PaginationTable/PaginationTable';
 
-let deleteId
+let deleteId = ""
+let changeStatusId
 let deletedIdArray
 class Users extends Component {
     
@@ -35,6 +36,10 @@ class Users extends Component {
         }
     }
 
+    async componentDidMount(){
+        await this.props.fetchUsers()
+    }
+
     
 
     // handleDelete = (id) => {
@@ -51,7 +56,7 @@ class Users extends Component {
     //     console.log(this.state.deletedIdArray);
     // }
 
-    handleChange = (id) =>{
+    handleClick = (id) =>{
         console.log(id);
         let temp = this.state.deletedIdArray
         let index = temp.indexOf(id)
@@ -78,13 +83,15 @@ class Users extends Component {
     // }
 
     showPopUp = (id) => {
+
         if(this.state.className === "modal"){
+            // console.log("show");
             this.setState({className: "modal show"})
             if(id !== -1){
                 deleteId = id
-                
+                console.log("single..........", deleteId);
             }else{
-               
+                console.log("all.............", this.state.deletedIdArray);
                 deletedIdArray = this.state.deletedIdArray
             }
         }
@@ -95,7 +102,7 @@ class Users extends Component {
 
     handleDelete = () => {
     
-        if(deleteId !== undefined){
+        if(deleteId !== ""){
             let temp = this.state.deletedIdArray
             let index = temp.indexOf(deleteId)
             temp.splice(index, 1)
@@ -103,55 +110,69 @@ class Users extends Component {
             this.setState({deletedIdArray: temp})
 
             this.props.deleteUser()
-
+            deleteId = ""
             this.setState({className: "modal"})
+            console.log("....single...", this.state.deletedIdArray.length);
         }else{
+            console.log("......all..........", this.state.deletedIdArray.length);
             this.props.deleteUsers()
             this.setState({deletedIdArray: []})
+            deletedIdArray = ""
             this.setState({className: "modal"})
         }
 
     }
 
     handleClose = () => {
+        console.log(this.state.className);
         if(this.state.className === "modal show")
             this.setState({className: "modal"})
     }
 
+    handleStatus = (id) => {
+        //alert("STATUS")
+        changeStatusId = id
+        this.props.changeStatus()
+    }
 
     render() { 
-        console.log(this.props.users);
+        console.log("render");
+        // console.log(this.props.users);
         return (
             
             <React.Fragment>
-                <div className="users-div">
-                    
 
-                    <div className="add-btn-div">
-                        <Link to="/dashboard/dashboard-content/action">
-                            <Button
-                                btnclass="userAddBtn"
-                                btnName="Add New User"
-                            />
-                        </Link>
+                <div className="user-container">
+                    <div className="users-div">
+                        
 
-                        {this.state.deletedIdArray.length > 1 &&
-                            <Button
-                                btnclass="userDeleteBtn"
-                                btnName="Delete Users"
-                                dataToggle="modal"
-                                dataTarget="#staticBackdrop"
-                                onClick={() => this.showPopUp(-1)}
-                            />
-                        }
+                        <div className="add-btn-div">
+                            <Link to="/dashboard/dashboard-content/action">
+                                <Button
+                                    btnclass="userAddBtn"
+                                    btnName="Add New User"
+                                />
+                            </Link>
+
+                            {this.state.deletedIdArray.length > 1 &&
+                                <Button
+                                    btnclass="userDeleteBtn"
+                                    btnName="Delete Users"
+                                    dataToggle="modal"
+                                    dataTarget="#staticBackdrop"
+                                    onClick={() => this.showPopUp(-1)}
+                                />
+                            }
+                        </div>
+            
+                        {this.props.users.length > 0 ? <PaginationTable 
+                                                            users={this.props.users}
+                                                            onClick={(id) => this.showPopUp(id)}
+                                                            onInputClick={(id) => this.handleClick(id)}
+                                                            onStatus={(id) => this.handleStatus(id)}    
+                                                        /> : <div className="no-user">No User Data Found</div>}
+
                     </div>
-        
-                    {this.props.users.length > 0 ? <PaginationTable 
-                                                        users={this.props.users}
-                                                        onClick={(id) => this.showPopUp(id)}
-                                                        onChange={(id) => this.handleChange(id)}    
-                                                    /> : <div className="no-user">No User Data Found</div>}
-
                 </div>
 
                 <div id="myModal" className={this.state.className}>
@@ -203,7 +224,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return{
         deleteUser: () => dispatch(deleteUser(deleteId)),
-        deleteUsers: () => dispatch(deleteUsers(deletedIdArray))
+        deleteUsers: () => dispatch(deleteUsers(deletedIdArray)),
+        changeStatus: () => dispatch(changeStatus(changeStatusId)),
+        fetchUsers: () => dispatch(fetchUsers())
     }
 }
  

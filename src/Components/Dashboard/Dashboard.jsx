@@ -6,6 +6,7 @@ import {Switch, Route} from 'react-router-dom'
 import routes from '../../route';
 import {withCookies, Cookies } from 'react-cookie';
 import { instanceOf } from 'prop-types';
+import Footer from '../Footer/Footer';
 
 class Dashboard extends Component {
     static propTypes = {
@@ -57,7 +58,7 @@ class Dashboard extends Component {
                         <Headerbar onClick={() => this.handleLogOut()}/>
                     </div>
 
-                    <div className="container">
+                    <div className="dashboard-container">
                         
                         <Switch>
                             {
@@ -73,8 +74,11 @@ class Dashboard extends Component {
                         </Switch>
 
                     </div>
-                </div>
 
+                    <Footer />
+                </div>
+                
+                
             </div> 
 
         );

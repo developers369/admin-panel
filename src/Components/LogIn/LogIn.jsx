@@ -178,11 +178,11 @@ class LogIn extends Component {
                             <div className="form-button">
 
                                 <GoogleLogin
-                                        clientId="368640192648-k1dtcnv4he11tugkt0vhqv3lhfu2jo93.apps.googleusercontent.com"
-                                        buttonText="Login"
-                                        onSuccess={this.responseGoogle}
-                                        onFailure={this.responseGoogle}
-                                        cookiePolicy={'single_host_origin'}
+                                    clientId="368640192648-k1dtcnv4he11tugkt0vhqv3lhfu2jo93.apps.googleusercontent.com"
+                                    buttonText="Login"
+                                    onSuccess={this.responseGoogle}
+                                    onFailure={this.responseGoogle}
+                                    cookiePolicy={'single_host_origin'}
                                 />
                             </div>
                             

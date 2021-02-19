@@ -5,7 +5,11 @@ import { instanceOf } from 'prop-types';
 import Button from '../../ReusableComponent/Button';
 import InputTag from '../../ReusableComponent/InputTag';
 import './Profile.scss'
-import { updateProfile } from '../../Redux/adminAction';
+import { fetchUsers, updateProfile } from '../../Redux/adminAction';
+import Previews from '../../Dropzone';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/lib/ReactCrop.scss';
+
 
 let fullName, email, profileImg
 class Profile extends Component {
@@ -21,7 +25,11 @@ class Profile extends Component {
             email: "",
             userName: "",
             password: "",
-            profileImg: null
+            profileImg: null,
+            image: null,
+            crop: {
+                aspect: 16/9
+            },
         }
     }
 
@@ -33,8 +41,8 @@ class Profile extends Component {
         }
     }
 
-    componentDidMount(){
-
+    async componentDidMount(){
+        await this.props.fetchUsers()
         this.setState({
             userName: this.props.admin.userName,
             fullName: this.props.admin.fullName,
@@ -83,8 +91,58 @@ class Profile extends Component {
         alert("Profile Updated Successfully")
     }
 
+    handleFile = (filePreview) => {
+        console.log("show popup......",filePreview);
+        this.setState({profileImg: filePreview})
+        document.getElementById("popUpModal").style.display="block"
+    }
+
+    onLoad = (image) => {
+        this.setState({image: image})
+    }
+
+    handleCrop = (crop) => {
+        this.setState({crop : crop})
+    }
+
+
+    makeCrop = () => {
+        //alert("hello")
+        const canvas = document.createElement('canvas');
+        const scaleX = this.state.image.naturalWidth /  this.state.image.width;
+        const scaleY =  this.state.image.naturalHeight /  this.state.image.height;
+        canvas.width =  this.state.crop.width;
+        canvas.height =  this.state.crop.height;
+        const ctx = canvas.getContext('2d');
+       
+        
+        ctx.drawImage(
+            this.state.image,
+            this.state.crop.x * scaleX,
+            this.state.crop.y * scaleY,
+            this.state.crop.width * scaleX,
+            this.state.crop.height * scaleY,
+            0,
+            0,
+            this.state.crop.width,
+            this.state.crop.height,
+        );
+
+        // this.setState({cropImage: canvas.toDataURL("image/jpeg")})
+
+        if(this.state.crop.x === 0){
+            this.setState({profileImg: this.state.profileImg})
+        }else{
+            this.setState({profileImg: canvas.toDataURL("image/jpeg")})
+        }
+       // console.log("handle", canvas.toDataURL("image/jpeg"));
+        document.getElementById("popUpModal").style.display="none"
+    }
+
     render() { 
         return ( 
+
+
             <div className="profile-div">
                 <form className="profile-form">
                     <h2>Admin Profile</h2>
@@ -128,8 +186,11 @@ class Profile extends Component {
                         />
                     </div>
 
+                    
+                    
+
                     <div className="form-items">
-                        <label className="label-profile-img">Profile Image<sup style={{color: "red"}}>*</sup></label> <br></br>
+                        {/* <label className="label-profile-img">Profile Image<sup style={{color: "red"}}>*</sup></label> <br></br>
 
                         {this.state.profileImg && <div className="img-preview" style={{width : "50px", height : "50px", marginBottom : "0px"}}>
                             
@@ -139,8 +200,12 @@ class Profile extends Component {
                             inputClass="inputTagFile"
                             type="file"
                             onChange={(e) => this.handleChange(e, "file")}
+                        /> */}
+                        <Previews 
+                            passFile={this.handleFile} 
+                            cropImage={this.state.profileImg}
                         />
-                         {/* <input id="i" type="file" onChange={this.handleFile}/> */}
+                        {/* <input id="i" type="file" onChange={this.handleFile}/> */}
                     </div>
 
 
@@ -154,7 +219,40 @@ class Profile extends Component {
 
                     </div>
                 </form>
+
+              
+                <div id="popUpModal" className="modal">
+
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            
+                            <p>Crop Image</p>
+                            <span className="close" onClick={() => document.getElementById("popUpModal").style.display="none"}>&times;</span>
+                        </div>
+                        <div className="modal-body">
+                            <ReactCrop src={this.state.profileImg} onImageLoaded={this.onLoad} crop={this.state.crop} onChange={this.handleCrop} />
+                        </div>
+                        <div className="modal-footer">
+                            <div className="footer-btn">
+                                <Button
+                                    btnclass="footer-crop"
+                                    btnName="Crop Image"
+                                    onClick={this.makeCrop}
+                                />
+
+                                <Button
+                                    btnclass="footer-cancel"
+                                    btnName="Cancel"
+                                    onClick={() => document.getElementById("popUpModal").style.display="none"}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+               
             </div>
+
         );
     }
 }
@@ -169,7 +267,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        updateProfile: () => dispatch(updateProfile(fullName, email, profileImg))
+        updateProfile: () => dispatch(updateProfile(fullName, email, profileImg)),
+        fetchUsers: () => dispatch(fetchUsers())
     }
 }
 

@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
 }
 
 .add-author-form{
@@ -27,18 +28,19 @@
   }
   
   .form-items{
-    margin-top: 15px;
+    position: relative;
+    padding-top: 15px;
 
     i{
       position: absolute;
       padding-left: 10px;
-      padding-top: 18px;
+      padding-top: 13px;
       font-size: 13px;
     }
   }
 
   .button-div{
-    margin-top: 20px;
+    padding-top: 20px;
   }
 
   .action-button{
@@ -54,4 +56,237 @@
 
 .cancel{
   margin-left: 30px;
+}
+
+
+  .modalCrop {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+      
+      /* Modal Content */
+      .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 40%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+  }
+  
+  /* The Close Button */
+  .close {
+  
+      color: black;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+      color:black;
+      text-decoration: none;
+      cursor: pointer;
+  }
+  
+  .modal-header {
+      padding: 2px 16px;
+      color: black;
+      font-size: 22px;
+  }
+  
+  .modal-body {
+      padding: 2px 16px;
+      display: flex;
+      align-items: center;
+  }
+  
+  .modal-footer {
+      padding: 2px 16px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+  }
+
+  
+  .footer-btn{
+      
+      .footer-crop{
+          background-color: rgb(48, 230, 72);
+          width: 120px;
+          margin-right: 15px;
+      }
+
+      .footer-crop:hover{
+          background-color: rgb(15, 167, 35);
+      }
+
+      .footer-cancel{
+          background-color: rgb(202, 199, 199);
+          width: 120px;
+      }
+
+      .footer-cancel:hover{
+          background-color: rgb(138, 136, 136);
+      }
+  }
+
+
+
+.ReactCrop{
+  height: 300px !important;
+  width: 100% !important;
+
+  div{
+      height: 300px !important;
+  }
+  .ReactCrop__image{
+      width: 100% !important;
+      height: 300px !important;
+  }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  .form-div{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 85% !important;
+
+    .add-author-form{
+
+      width: 85% !important;
+
+
+      h2{
+        font-size: 25px !important;
+      }
+
+
+    }
+
+    .action-button{
+      font-size: 14px !important;
+      margin-bottom: 10px !important;
+    }
+
+  }
+
+  #popUpModal{
+    .modal-content{
+        width: 80% !important;
+    }
+}
+
+    .container{
+        aside{
+            padding-bottom: 5px;
+            div{
+                margin-top: -5px !important;
+                width: 95px !important;
+                height: 100px !important;
+                
+
+                div{
+                    img{
+                        
+                        width: 100% !important;
+                        height: auto !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  /* CSS */
+  .form-div{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 85% !important;
+
+    .add-author-form{
+
+      width: 85% !important;
+
+
+      h2{
+        font-size: 25px !important;
+      }
+
+
+    }
+
+    .action-button{
+      font-size: 14px !important;
+      margin-bottom: 10px !important;
+    }
+
+  }
+
+  #popUpModal{
+    .modal-content{
+        width: 80% !important;
+    }
+}
+
+    .container{
+        aside{
+            padding-bottom: 5px;
+            div{
+                margin-top: -5px !important;
+                width: 95px !important;
+                height: 100px !important;
+                
+
+                div{
+                    img{
+                        
+                        width: 100% !important;
+                        height: auto !important;
+                    }
+                }
+            }
+        }
+    }
 }

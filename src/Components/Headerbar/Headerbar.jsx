@@ -3,10 +3,10 @@ import {withCookies, Cookies } from 'react-cookie';
 import { instanceOf } from 'prop-types';
 import {connect} from 'react-redux'
 import Button from '../../ReusableComponent/Button';
-import InputTag from '../../ReusableComponent/InputTag';
+
 import './Headerbar.scss';
 
-let getFirst
+
 class Headerbar extends Component {
 
     static propTypes = {
@@ -21,7 +21,7 @@ class Headerbar extends Component {
            
         }
        
-        console.log(this.props);
+        // console.log(this.props);
     }
 
     handleChange = (e) =>{
@@ -41,24 +41,13 @@ class Headerbar extends Component {
     render() { 
         return ( 
             <React.Fragment>
-                <div className="headerbar">
 
-                    {/* <div className="search-container">
-                    
-                        <InputTag
-                            inputClass="inputTag" 
-                            type="name"
-                            inputText={this.state.searchText}
-                            placeHolder="Search..."
-                            onChange={ (e) => this.handleChange(e)}
-                        />
-                    </div> */}
-                    
+                <div className="headerbar">
                     <div className="headerbar-img" onClick={() => this.showLogOut()}>
                         <img src={this.props.profileImg} alt="Profile"></img>
                     </div>
+                </div>
 
-            </div>
 
                 <div className={this.state.showLogOut}>
 

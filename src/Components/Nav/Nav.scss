@@ -1,20 +1,22 @@
 .header{
     display: flex;
     align-items: center;
-    padding-top: 5px;
-    padding-bottom: 15px;
-    padding-left: 10px;
+    justify-content: center;
+    padding-top: 10px;
+    background-color: #47E0A9;
+    color: white;
+
     // border-bottom: 1px solid white;
     h2{
         margin-left: 10px;
-        font-size: 17px;
+        font-size: 18px;
         display: inline;
     }
 }
 
 .profileImg{
     padding: 0px;
-    width: 50px;
+    width: 40px;
     height: 40px;
 }
 
@@ -30,25 +32,32 @@
 }
 
 .nav-items{
-
+   
     ul{
-
+        
         width: 100%;
         list-style-type: none;
         padding-inline-start: 0px !important;
         margin-block-start: 0px !important;
 
-        
-        li{
-            padding: 15px;
-            text-decoration: none;
-            .icon{
-                float: left;  
-            }
+        a{
+            display: flex;
+        }
 
+        li{
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            width: 100%;
+    
+            
+            
             p{
                 margin-left: 10px;
                 display: inline;
+                margin-top: 0px !important;
+                margin-bottom: 0px !important;
             }
         }
 
@@ -64,8 +73,7 @@
 }
 
 .more-items{
-    display: none;
-    
+    display: none;   
 }
 
 .showMore{
@@ -75,3 +83,68 @@
     }
 }
 
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+    
+    .profileImg{
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .header{
+        display: block;
+        padding: 7px !important;
+        // padding-top: 10px !important;
+        // padding-bottom: 5px !important;
+    }
+
+    .nav-p{
+        display: none !important;
+    }
+
+    .logo-name{
+        display: none !important;
+    }
+
+    .navbar-item{
+        padding: 21px !important;
+    }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+    /* CSS */
+    .profileImg{
+        width: 45px !important;
+        height: 45px !important;
+    }
+
+    .header{
+        display: block;
+        padding: 15px !important;
+        // padding-top: 10px !important;
+        // padding-bottom: 5px !important;
+    }
+
+    .nav-p{
+        display: none !important;
+    }
+
+    .logo-name{
+        display: none !important;
+    }
+
+    .navbar-item{
+        padding: 29px !important;
+    }
+}

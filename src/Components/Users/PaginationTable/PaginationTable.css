@@ -1,0 +1,60 @@
+.action-btn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+}
+
+.user-action-btn-div {
+  width: 30px;
+  height: 35px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.user-action-btn-div i {
+  position: absolute;
+  padding-left: 9px;
+  font-size: 14px !important;
+  padding-top: 7px;
+  color: white;
+}
+
+.user-action-btn-checkbox {
+  width: 28px;
+  height: 28px;
+  margin-right: 5px;
+  border-radius: 10px;
+  margin-top: -3px;
+  padding-left: 8px;
+  padding-top: 2px;
+}
+
+.user-action-button-edit {
+  width: 20px;
+  height: 30px;
+  background-color: #2d3ae7;
+  border-radius: 10px;
+}
+
+.user-action-button-delete {
+  width: 20px;
+  height: 30px;
+  background-color: #d42c2c;
+  border-radius: 10px;
+}
+
+.table th {
+  text-align: center;
+}
+
+.table td {
+  text-align: center;
+}
+/*# sourceMappingURL=PaginationTable.css.map */
