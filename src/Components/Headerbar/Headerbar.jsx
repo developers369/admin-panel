@@ -3,9 +3,16 @@ import {withCookies, Cookies } from 'react-cookie';
 import { instanceOf } from 'prop-types';
 import {connect} from 'react-redux'
 import Button from '../../ReusableComponent/Button';
-
+import { swing } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
 import './Headerbar.scss';
 
+const styles = {
+    swing: {
+        animation: 'x 1s',
+        animationName: Radium.keyframes(swing, 'swing')
+    }
+}
 
 class Headerbar extends Component {
 
@@ -22,6 +29,21 @@ class Headerbar extends Component {
         }
        
         // console.log(this.props);
+    }
+
+    componentDidMount(){
+        // document.onclick = function(e){
+        //    //alert(e.target.id);
+        //     var headerbar = document.getElementById("headerbar")
+        //     if(e.target.id !== 'headerbar'){
+        //       //element clicked wasn't the div; hide the div
+        //       document.getElementById("log-out").style.display = 'none';
+        //     }else{
+        //         document.getElementById("log-out").style.display = 'flex';
+        //         document.getElementById("log-out").style.flexDirection = 'column';
+        //         document.getElementById("log-out").style.alignItems = 'center';
+        //     }
+        // };
     }
 
     handleChange = (e) =>{
@@ -44,27 +66,33 @@ class Headerbar extends Component {
 
                 <div className="headerbar">
                     <div className="headerbar-img" onClick={() => this.showLogOut()}>
-                        <img src={this.props.profileImg} alt="Profile"></img>
+                        <img id="headerbar" src={this.props.profileImg} alt="Profile"></img>
                     </div>
                 </div>
 
 
-                <div className={this.state.showLogOut}>
+                <StyleRoot>
+    
+    
+                    <div id="log-out" className={this.state.showLogOut} style={styles.swing}>
 
-                    <div className="uname-pic">
+                        <div className="uname-pic">
 
-                        {this.props.userName[0].toUpperCase()}
+                            {this.props.userName[0].toUpperCase()}
+
+                        </div>
+                        <h5>{this.props.userName}</h5>
+
+                        <Button
+                            btnClass="btn-log-out"
+                            btnName="Log Out"
+                            onClick={this.props.onClick}
+                        />
 
                     </div>
-                    <h5>{this.props.userName}</h5>
 
-                    <Button
-                        btnClass="btn-log-out"
-                        btnName="Log Out"
-                        onClick={this.props.onClick}
-                    />
+                </StyleRoot>
 
-                </div>
             </React.Fragment>
         );
     }

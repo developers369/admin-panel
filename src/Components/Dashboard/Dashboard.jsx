@@ -15,7 +15,10 @@ class Dashboard extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+            className : "left",
+            rightName : "right"
+        }
         
     }
 
@@ -41,20 +44,31 @@ class Dashboard extends Component {
 
     }
     
+    showNav = () => {
+        if(this.state.className === "left")
+            this.setState({className: "left show", rightName: "right change-width"})
+    }
+
+
+    closeNav = () => {
+        this.setState({className: "left", rightName: "right"})
+    }
+
     render() { 
         return ( 
             <div className="admin-panel">
 
                 {/* navigation bar */}
-                <div className="left">
+                <div className={this.state.className}>
                     <div className="nav-div">
-                    <Nav />
+                        <Nav closeNav={this.closeNav}/>
                     </div>
                 </div>
 
                 {/* header bar */}
-                <div className="right">
+                <div className={this.state.rightName}>
                     <div className="headerbar-div">
+                        <i className="fa fa-bars toggle" aria-hidden="true" onClick={this.showNav}></i>
                         <Headerbar onClick={() => this.handleLogOut()}/>
                     </div>
 
@@ -72,10 +86,10 @@ class Dashboard extends Component {
                                 })
                             }
                         </Switch>
-
+                        
+                        <Footer/>
                     </div>
-
-                    <Footer />
+                    
                 </div>
                 
                 

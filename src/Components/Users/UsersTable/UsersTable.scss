@@ -1,0 +1,142 @@
+.users-table-container{
+    padding: 50px 0px;
+    width: 100%;
+    background-color: white;
+    overflow-x: scroll;
+    box-shadow: 0 6px 15px rgb(141, 140, 140);
+
+    .user-table{
+        width: 100%;
+        height: auto;
+
+        .table-header{
+            font-weight: bold;
+
+            td{
+                padding: 20px 5px;
+
+            }
+        }
+
+        .table-body{
+            td{
+                border-top: 1px solid rgba(184, 181, 181, 0.5);
+                border-bottom: 1px solid rgba(184, 181, 181, 0.5);
+                padding: 15px 5px;
+            
+                .td-div{
+                    // border: 1px solid red;
+                    display: flex;
+                    align-items: center;
+                    
+                    .user-icon-container{
+                        height: 32px;
+                        width: 32px;
+                        border-radius: 50%;
+                        border: 1px solid #D9D8D8;
+                        position: relative;
+                        display: inline-block;
+
+                        .user-icon{
+                            position: absolute;
+                            font-size: 20px;
+                            color: #B2B1B0;
+                            left: 8px;
+                            bottom: 0;
+
+                        }
+                    }
+                    
+                    .email-icon-container{
+                        height: 32px;
+                        width: 32px;
+                        border-radius: 50%;
+                        border: 1px solid #D9D8D8;
+                        position: relative;
+                        display: inline-block;
+                        background-color: #F9C10C;
+
+                        .email-icon{
+                            position: absolute;
+                            font-size: 15px;
+                            color: white;
+                            left: 7px;
+                            top: 8px;
+                        }
+                    }
+
+                    p{
+                        display: inline !important;
+                        margin: 0px !important;
+                        margin-left: 5px !important;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.action-btn-container{
+    
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100%;
+}
+
+.user-action-btn-div{
+    width: 30px;
+    height: 35px;
+    margin-right: 5px;
+    cursor: pointer;
+    position: relative;
+
+    i{
+        position: absolute;
+        padding-left: 9px;
+        font-size: 14px !important;
+        padding-top: 8px;
+        color: white;
+    }
+}
+
+.user-action-btn-checkbox{
+    width: 28px;
+    height: 28px;
+    margin-right: 5px;
+    border-radius: 10px;
+    margin-top: -3px;
+    padding-left: 8px;
+    padding-top: 2px;
+
+}
+
+.user-action-button-edit{
+    width: 30px;
+    height: 30px;
+    background-color: #3DA9F3;
+    border-radius: 50%;
+    padding: 10px;
+    
+}
+
+.user-action-button-delete{
+    width: 30px;
+    height: 30px;
+    background-color: #F79678;
+    border-radius: 10px;
+    border-radius: 50%;
+    padding: 10px;
+    
+}
+
+.user-action-button-status{
+    width: 30px;
+    height: 30px;
+    background-color: #F79678;
+    border-radius: 10px;
+    border-radius: 50%;
+    padding: 10px;
+    
+}

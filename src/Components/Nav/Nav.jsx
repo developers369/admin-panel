@@ -31,6 +31,7 @@ class Nav extends Component {
                     
                     <h3 className="profileName">{this.props.admin.name}</h3>
                 </div> */}
+                
                 <Link to="/dashboard/dashboard-content" style={{textDecoration:"none"}}>
                     <div className="header">
                         <div className="profileImg">
@@ -39,6 +40,11 @@ class Nav extends Component {
                         <h2 className="logo-name">My Admin</h2>
                     </div>
                 </Link>
+
+                <div className="nav-close" onClick={this.props.closeNav}>
+                    <span>&times;</span>
+                </div>
+                
 
                 <div className="nav-items">
                     <ul>

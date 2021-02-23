@@ -51,8 +51,6 @@ class LineChartP extends Component {
                     InActive: inactiveUser
                 })
             }
-            
-
         };
 
         // console.log(chartData);

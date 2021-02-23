@@ -23,10 +23,9 @@ class DashboardContent extends Component {
     }
 
 
-    async componentDidMount(){
-        console.log("mount");
-        await this.props.fetchUsers()
-        console.log("data", this.props.users);
+    componentDidMount(){
+        // console.log("mount");
+        // console.log("data", this.props.users);
         var allUser = this.props.users.length
         var activeUser=0, inactiveUser=0
         this.props.users.forEach(user => {
@@ -384,7 +383,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        fetchUsers: () => dispatch(fetchUsers())
+        // fetchUsers: () => dispatch(fetchUsers())
     }
 }
 

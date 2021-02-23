@@ -7,6 +7,7 @@ import {changeStatus, deleteUser, deleteUsers, fetchUsers} from '../../Redux/adm
 import {withCookies, Cookies } from 'react-cookie'
 import {instanceOf} from 'prop-types'
 import PaginationTable from './PaginationTable/PaginationTable';
+import UsersTable from './UsersTable';
 
 let deleteId = ""
 let changeStatusId
@@ -22,7 +23,10 @@ class Users extends Component {
         this.state = { 
             deleteId: 0,
             deletedIdArray: [],
-            className: "modal"
+            className: "modal",
+            allUser: "",
+            activeUser: "",
+            inactiuveUser: ""
         }
         console.log(this.state.deletedIdArray);
     }
@@ -36,10 +40,28 @@ class Users extends Component {
         }
     }
 
-    async componentDidMount(){
-        await this.props.fetchUsers()
-    }
+    componentDidMount(){
+        // console.log("mount");
+        // console.log("data", this.props.users);
+        var allUser = this.props.users.length
+        var activeUser=0, inactiveUser=0
+        this.props.users.forEach(user => {
+            if(user.status)
+                activeUser++
+            else
+                inactiveUser++
+        })
 
+        // console.log(activeUser);
+        // console.log(inactiveUser);
+
+        this.setState({
+            allUser,
+            activeUser,
+            inactiveUser
+        })
+    }
+  
     
 
     // handleDelete = (id) => {
@@ -145,14 +167,73 @@ class Users extends Component {
                 <div className="user-container">
                     <div className="users-div">
                         
+                        <div className="user-card-header">
 
-                        <div className="add-btn-div">
-                            <Link to="/dashboard/dashboard-content/action">
-                                <Button
-                                    btnclass="userAddBtn"
-                                    btnName="Add New User"
-                                />
-                            </Link>
+                            <div className="card-container-header">
+                                <p>Users</p>
+                                <Link to="/dashboard/dashboard-content/action">
+                                    <Button
+                                            btnclass="userAddBtn"
+                                            btnName="Add User"
+                                    />
+                                </Link>
+                            </div>
+
+                            <div className="user-card-container">
+                                <div className="card">
+
+                                    <div className="card-body">
+                                        <h5 className="card-title">All Users</h5>
+
+                                        <div className="pulsating-circle">
+                                            <div className="card-icon-all">
+                                                <i className="fa fa-users card-icon" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <p className="card-value">{this.state.allUser}</p>
+                                    </div>
+
+                                </div>
+
+                                <div className="card">
+
+                                    <div className="card-body">
+                                        <h5 className="card-title">Active Users</h5>
+                                        
+                                        <div className="pulsating-circle">
+                                            <div className="card-icon-active">
+                                                <i className="fa fa-check card-icon" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <p className="card-value">{this.state.activeUser}</p>
+                                    </div>
+
+                                </div>
+
+                                <div className="card">
+
+                                    <div className="card-body">
+                                        <h5 className="card-title">Inactive Users</h5>
+                                        
+                                        <div className="pulsating-circle">
+                                            <div className="card-icon-inactive">
+                                                <i className="fa fa-eye-slash card-icon" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <p className="card-value">{this.state.inactiveUser}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    
+                        {/* <div className="add-btn-div">
+                                <Link to="/dashboard/dashboard-content/action">
+                                    <Button
+                                        btnclass="userAddBtn"
+                                        btnName="Add User"
+                                    />
+                                </Link>
 
                             {this.state.deletedIdArray.length > 1 &&
                                 <Button
@@ -163,19 +244,24 @@ class Users extends Component {
                                     onClick={() => this.showPopUp(-1)}
                                 />
                             }
-                        </div>
+                        </div> */}
+
+                            <UsersTable users={this.props.users} />
+
+                        
             
-                        {this.props.users.length > 0 ? <PaginationTable 
+                        {/* {this.props.users.length > 0 ? <PaginationTable 
                                                             users={this.props.users}
                                                             onClick={(id) => this.showPopUp(id)}
                                                             onInputClick={(id) => this.handleClick(id)}
                                                             onStatus={(id) => this.handleStatus(id)}    
-                                                        /> : <div className="no-user">No User Data Found</div>}
+                                                        /> : <div className="no-user">No User Data Found</div>} */}
 
                     </div>
                 </div>
 
-                <div id="myModal" className={this.state.className}>
+
+                {/* <div id="myModal" className={this.state.className}>
 
                     <div className="modal-content">
                         <div className="modal-header">
@@ -203,7 +289,7 @@ class Users extends Component {
                         </div>
                     </div>
 
-                </div>
+                </div> */}
 
             </React.Fragment>
 
@@ -226,7 +312,7 @@ const mapDispatchToProps = dispatch => {
         deleteUser: () => dispatch(deleteUser(deleteId)),
         deleteUsers: () => dispatch(deleteUsers(deletedIdArray)),
         changeStatus: () => dispatch(changeStatus(changeStatusId)),
-        fetchUsers: () => dispatch(fetchUsers())
+        // fetchUsers: () => dispatch(fetchUsers())
     }
 }
  

@@ -47,8 +47,8 @@ class AddUpdateUser extends Component {
     }
     
 
-    async componentDidMount(){
-        await this.props.fetchUsers()
+    componentDidMount(){
+    
         if(this.props.match.params.id){
             // console.log("id exist");
             // console.log("array",this.props.users.filter(user => user.authorId === this.props.match.params.id))
@@ -200,6 +200,7 @@ class AddUpdateUser extends Component {
     handleCancel = () => {
         //alert("Hello")
         document.getElementById("popUpModal").style.display="none"
+        this.setState({avatar: this.state.profileImg})
         // this.setState({avatar: this.state.profileImg})
     }
 
@@ -343,7 +344,7 @@ const mapDispatchToProps = dispatch => {
     return{
         addUser: () => dispatch(addUser(fullName, salary, email, contact, avatar)),
         updateUser: () => dispatch(updateUser(updateAuthorId, fullName, salary, email, contact, avatar)),
-        fetchUsers: () => dispatch(fetchUsers(fetchUsers))
+        // fetchUsers: () => dispatch(fetchUsers(fetchUsers))
     }
 }
 

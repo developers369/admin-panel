@@ -8,7 +8,19 @@ import React from 'react';
 function App() {
 
   const loading = (
-    <div className="loader">Loading...</div>
+    <div className="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   )
 
   const LogIn = React.lazy(() => import("./Components/LogIn"))

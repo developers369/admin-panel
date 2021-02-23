@@ -41,8 +41,8 @@ class Profile extends Component {
         }
     }
 
-    async componentDidMount(){
-        await this.props.fetchUsers()
+    componentDidMount(){
+
         this.setState({
             userName: this.props.admin.userName,
             fullName: this.props.admin.fullName,
@@ -268,7 +268,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return{
         updateProfile: () => dispatch(updateProfile(fullName, email, profileImg)),
-        fetchUsers: () => dispatch(fetchUsers())
+        // fetchUsers: () => dispatch(fetchUsers())
     }
 }
 

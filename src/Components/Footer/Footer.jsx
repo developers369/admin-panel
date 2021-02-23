@@ -8,7 +8,7 @@ class Footer extends Component {
     render() { 
         return ( 
             <div className="footer-div">
-                <p>2020@ My admin</p>
+                <p>2021@ My admin</p>
             </div>
          );
     }

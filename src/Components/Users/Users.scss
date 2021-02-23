@@ -6,12 +6,11 @@
     align-items: center;
     width: 100%;
     height: 85vh;
-    
 }
 
 .users-div{
-    margin-top: -50px;
-    width: 80%;
+    width: 98%;
+    background-color: white;
 }
 
 .no-user{
@@ -27,17 +26,133 @@
     background-color: rgb(191, 198, 198);
 }
 
+.card-container-header{
+    
+    padding: 10px 10px;
+
+    p{
+        display: inline-block;
+        font-size: 20px;
+    }
+
+    .userAddBtn{
+        background-color: #FFFFFF;
+        color: #F9B8A4;
+        width: 140px;
+        margin-right: 10px;
+        border: 2px solid #F9B8A4;
+        font-weight: bold;
+        outline: none;
+        float: right;
+    }
+
+}
+
+.user-card-container{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px;
+
+    .card{
+        width: 30%;
+        border: none;
+        margin-left: 10px;
+
+        h5{
+            font-size: 16px;
+        }
+
+        .card-body{
+            padding: 0px !important;
+            padding: 10px 20px !important;
+        }
+
+        %style-icon{
+            display: inline-block;
+            border-radius: 50%;
+            // border: 1px solid;
+            padding: 3px 8px;
+        }
+
+        .card-value{
+            padding-top: 4px;
+        }
+
+        .pulsating-circle{
+            position: absolute;
+            //background-color: gray;
+     
+
+            .card-icon-all{
+                @extend %style-icon;
+                background-color: #7F66B2;
+                animation: animate 1.5s linear infinite;
+            }
+
+            .card-icon-all:hover{
+                animation-play-state: paused;
+                background-color: #8e7cb3;
+            }
+
+            
+
+            .card-icon-active{
+                @extend %style-icon;
+                background-color: #30926F;
+                animation: animate1 1.5s linear infinite;
+            }
+
+            .card-icon-active:hover{
+                animation-play-state: paused;
+                background-color: #50927b;
+            }
+
+            
+
+            .card-icon-inactive{
+                @extend %style-icon;
+                background-color: #BB6C57;
+                animation: animate2 1.5s linear infinite;
+            }
+
+            .card-icon-inactive:hover{
+                animation-play-state: paused;
+                background-color: #b97c6b;
+            }
+
+            
+        }
+        
+        .card-icon{
+            color: white;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .card-value{
+            // display: inline-block;
+            float: right;
+        }
+    }
+}
 
 .add-btn-div{
     float: right;
     .userAddBtn{
-        background-color: rgb(19, 201, 43);
+        background-color: #FFFFFF;
+        color: #F9B8A4;
         width: 140px;
         margin-right: 10px;
+        border: 2px solid #F9B8A4;
+        font-weight: bold;
+        outline: none;
     }
 
     .userAddBtn:hover{
-        background-color: rgb(17, 141, 33);
+        background-color: #F9B8A4;
+        color: white;
     }
 
     .userDeleteBtn{
@@ -173,18 +288,24 @@ to {top:0; opacity:1}
     
     .users-div{
         width: 100% !important;
-        // padding: 10px !important;
+        
+        
+        td{
+            width: 100vh;
+            text-align: center;
+
+        }
     }
-    .table{
-        display: flex;
-        flex-direction: column;
-        width: 100% !important;
-    }
+   
+
     .dataTables_wrapper{
         width: 100% !important;
+
     }
+
     .row{
         margin: 0px !important;
+        overflow-x: scroll;
     
         div{
             padding: 0px !important;
@@ -208,19 +329,23 @@ to {top:0; opacity:1}
     /* CSS */
     .users-div{
         width: 100% !important;
-        // padding: 10px !important;
+        overflow-x: scroll;
+
+        
     }
     .table{
         display: flex;
         flex-direction: column;
         width: 100% !important;
     }
+    
     .dataTables_wrapper{
         width: 100% !important;
     }
+
     .row{
         margin: 0px !important;
-    
+        overflow-x: scroll;
         div{
             padding: 0px !important;
         }
@@ -232,3 +357,16 @@ to {top:0; opacity:1}
         }
     }
   }
+  
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .users-div{
+        width: 97% !important;
+    }
+}

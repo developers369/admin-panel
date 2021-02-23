@@ -5,7 +5,7 @@
 }
   
   .left{
-    display: flex;
+    display: block;
     width: 15%; 
     background-color: #46495C;
     
@@ -14,17 +14,28 @@
       width: 15%;
     }
   }
+
   
   .right{
 
     display: flex;
     flex-direction: column;
     width: 85%;
-
+    position: relative;
     
     .headerbar-div{
       padding-right: 10px;
       background-color: #46495C;
+      position: relative;
+
+      .toggle{
+        cursor: pointer;
+        display: none;
+        color: white;
+        border: 3px solid #72747b;
+        font-size: 22px;
+        padding: 12px;
+      }
     }
   }
 
@@ -32,9 +43,12 @@
     // display: flex;
     // align-items: center;
     // justify-content: center;
+
     width: 100%;
+
     overflow-y: scroll;
   }
+  
   
 /* 
   ##Device = Most of the Smartphones Mobiles (Portrait)
@@ -43,9 +57,138 @@
 
 @media (min-width: 320px) and (max-width: 480px) {
   
+  /* for naviugation bar */
+  .toggle{
+    display: inline-block !important;
+  }
+
+  
+  .left{
+    display: none !important;
+    width: 100% !important;
+  }
+
   .dashboard-container{
     padding: 0px !important;
   }
+
+  .nav-close{
+    display: block !important;
+  }
+  .show{
+
+    display: flex !important;
+    width: 100% !important;
+    
+    .nav-div{
+      width: 100% !important;
+    }
+
+    .header{
+      padding-left: 20px;
+      justify-content: left;
+
+     
+    }
+
+    // width: 100% !important;
+  }
+
+  .right{
+    width: 100% !important;
+  }
+
+  .change-width{
+    display: none !important;
+  }
   
+
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
   
+  /* CSS */
+  /* for naviugation bar */
+  .toggle{
+    display: inline-block !important;
+  }
+
+  .nav-close{
+    display: block !important;
+  }
+  
+  .left{
+    display: none !important;
+    width: 100% !important;
+  }
+
+  .dashboard-container{
+    padding: 0px !important;
+  }
+
+  .show{
+
+    display: flex !important;
+    width: 100% !important;
+    
+    .nav-div{
+      width: 100% !important;
+    }
+
+    .header{
+      padding-left: 20px;
+      justify-content: left;
+
+      .nav-close{
+        padding: 16px;
+        font-size: 22px;
+        color: white;
+        display: block;
+        position: absolute;
+        right: 0px;
+        margin-top: -14px;
+      }
+    }
+
+    // width: 100% !important;
+  }
+
+  .right{
+    width: 100% !important;
+
+
+    // .headerbar{
+    //   display: none;
+    // }
+  }
+
+  .change-width{
+    display: none !important;
+  }
+}
+
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    
+  .left{
+      width: 18% !important;
+
+      .nav-div{
+          width: 18% !important;
+      }
+  }
+
+  .right{
+      width: 82% !important;
+  }
 }
