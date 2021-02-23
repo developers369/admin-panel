@@ -80,7 +80,7 @@
             padding-top: 4px;
         }
 
-        .pulsating-circle{
+        .circle{
             position: absolute;
             //background-color: gray;
      
@@ -88,7 +88,7 @@
             .card-icon-all{
                 @extend %style-icon;
                 background-color: #7F66B2;
-                animation: animate 1.5s linear infinite;
+                // animation: animate 1.5s linear infinite;
             }
 
             .card-icon-all:hover{
@@ -101,7 +101,7 @@
             .card-icon-active{
                 @extend %style-icon;
                 background-color: #30926F;
-                animation: animate1 1.5s linear infinite;
+                // animation: animate1 1.5s linear infinite;
             }
 
             .card-icon-active:hover{
@@ -114,7 +114,7 @@
             .card-icon-inactive{
                 @extend %style-icon;
                 background-color: #BB6C57;
-                animation: animate2 1.5s linear infinite;
+                // animation: animate2 1.5s linear infinite;
             }
 
             .card-icon-inactive:hover{

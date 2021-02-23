@@ -185,7 +185,7 @@ class Users extends Component {
                                     <div className="card-body">
                                         <h5 className="card-title">All Users</h5>
 
-                                        <div className="pulsating-circle">
+                                        <div className="circle">
                                             <div className="card-icon-all">
                                                 <i className="fa fa-users card-icon" aria-hidden="true"></i>
                                             </div>
@@ -200,7 +200,7 @@ class Users extends Component {
                                     <div className="card-body">
                                         <h5 className="card-title">Active Users</h5>
                                         
-                                        <div className="pulsating-circle">
+                                        <div className="circle">
                                             <div className="card-icon-active">
                                                 <i className="fa fa-check card-icon" aria-hidden="true"></i>
                                             </div>
@@ -215,7 +215,7 @@ class Users extends Component {
                                     <div className="card-body">
                                         <h5 className="card-title">Inactive Users</h5>
                                         
-                                        <div className="pulsating-circle">
+                                        <div className="circle">
                                             <div className="card-icon-inactive">
                                                 <i className="fa fa-eye-slash card-icon" aria-hidden="true"></i>
                                             </div>
