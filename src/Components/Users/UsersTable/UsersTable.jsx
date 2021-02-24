@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 import InputTag from '../../../ReusableComponent/InputTag';
+import SelectTag from '../../../ReusableComponent/SelectTag';
 import "./UsersTable.scss";
 
 class UsersTable extends Component {
@@ -18,7 +19,7 @@ class UsersTable extends Component {
                     <thead className="table-header">
                         <tr className="header-row">
                             <td>
-                                <div className="user-action-btn-checkbox" data-tip data-for="select" >
+                                <div className="all-checkbox" data-tip data-for="select" >
                                     <InputTag
                                         inputClass="checkbox"
                                         type="checkbox"
@@ -40,7 +41,7 @@ class UsersTable extends Component {
 
                     {this.props.users.length > 0 ? <tbody className="table-body">
 
-                        {this.props.users.map(user => <tr>
+                        {this.props.users.map(user => <tr key={user.ID}>
                             <td>
                                 <div className="user-action-btn-checkbox" data-tip data-for="select" >
                                     <InputTag
@@ -134,6 +135,44 @@ class UsersTable extends Component {
                         </tbody>
                     }
                 </table>
+
+                <div className="bottom-component-container">
+
+                    <div className="bottom-components">
+
+                        <div className="component-field">
+                            <label>Rows Per Page</label>   
+                            <SelectTag
+                                selectClass="rows-per-page"
+                                optionArray={[5, 10, 15]}
+                                onChange={this.props.onChange}
+                            /> 
+                        </div>
+
+                        <div className="component-field">
+                            <label>Total Records: {this.props.totalRecords}</label>   
+                        </div>
+
+                        <div className="component-field">
+                            <label>Current page: {this.props.currentPage}/{this.props.totalPage}</label>
+                            
+                        </div>
+
+                        <div className="angle-field">
+
+                            <div className="angle-icon" onClick={this.props.prevPage}>
+                                <i className="fa fa-angle-left" aria-hidden="true"></i>  
+                            </div>
+
+                            <div className="angle-icon" onClick={this.props.nextPage}>
+                                <i className="fa fa-angle-right" aria-hidden="true"></i>  
+                            </div>
+                        </div>
+
+                    </div>
+                    
+
+                </div>
             </div>
         );
     }

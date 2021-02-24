@@ -1,14 +1,17 @@
 
-.user-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 85vh;
-}
+// .user-container{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     width: 100%;
+//     height: 85vh;
+//     overflow-y: scroll;
+// }
 
 .users-div{
+    margin: 15px auto;
+    font-size: 14px;
     width: 98%;
     background-color: white;
 }

@@ -8,10 +8,14 @@ import {withCookies, Cookies } from 'react-cookie'
 import {instanceOf} from 'prop-types'
 import PaginationTable from './PaginationTable/PaginationTable';
 import UsersTable from './UsersTable';
+import Filter from './Filter';
 
 let deleteId = ""
 let changeStatusId
 let deletedIdArray
+let isChangedRows = false
+let isClickedPrev = false
+
 class Users extends Component {
     
     static propTypes = {
@@ -26,8 +30,22 @@ class Users extends Component {
             className: "modal",
             allUser: "",
             activeUser: "",
-            inactiuveUser: ""
+            inactiuveUser: "",
+
+            // filter data
+            sort: "",
+            filter: "",
+            usersData: [],
+
+            // footer of pagination table
+            rowsPerPage: 5,
+            currentPage: 0,
+            totalPage: 0,
+
+            // loader
+            isLoader: false
         }
+
         console.log(this.state.deletedIdArray);
     }
 
@@ -42,7 +60,6 @@ class Users extends Component {
 
     componentDidMount(){
         // console.log("mount");
-        // console.log("data", this.props.users);
         var allUser = this.props.users.length
         var activeUser=0, inactiveUser=0
         this.props.users.forEach(user => {
@@ -60,25 +77,65 @@ class Users extends Component {
             activeUser,
             inactiveUser
         })
-    }
+
+        if(allUser > 0){
+            this.setState({currentPage: 1})
+        }
+
+        this.filterUserData(allUser)
+
   
+    }
     
+    componentDidUpdate(){
+        if(isChangedRows){
+            isChangedRows = false
+            this.filterUserData(this.props.users.length)
+        }
 
-    // handleDelete = (id) => {
+        if(isClickedPrev){
+            isClickedPrev = false
+            let rows = []
+
+            let index = this.state.rowsPerPage*this.state.currentPage
+            for(var i=(index-this.state.rowsPerPage); i<index; i++){
+
+                if(i < this.props.users.length)
+                    rows.push(this.props.users[i])
+            }
+
+            this.setState({
+                usersData: rows
+            })
+        }
         
-    //     let temp = this.state.deletedIdArray
-    //     let index = temp.indexOf(id)
-    //     temp.splice(index, 1)
+    }
 
-    //     this.setState({deletedIdArray: temp})
-        
-    //     alert(id)
-    //     deleteId = id
-    //     this.props.deleteUser()
-    //     console.log(this.state.deletedIdArray);
-    // }
+    filterUserData(allUser){
+        // calculate total page
+        let totalPage = Math.ceil(allUser/this.state.rowsPerPage)
 
-    handleClick = (id) =>{
+        this.setState({totalPage})
+
+        // now store records according to rows per page
+        let rows = []
+
+        for(var i=0; i<this.state.rowsPerPage; i++){
+
+            if(i < this.props.users.length)
+                rows.push(this.props.users[i])
+        }
+
+        console.log("new array---------", rows);
+
+        // now set filter array to the userData
+        this.setState({usersData: rows})
+
+        return false
+    }
+
+
+    handleClick = (id) => {
         console.log(id);
         let temp = this.state.deletedIdArray
         let index = temp.indexOf(id)
@@ -92,17 +149,6 @@ class Users extends Component {
         // alert(this.state.checkbox + " "+ id)
     }
 
-    // handleMultipleDelete = () => {
-    //     alert(this.state.deletedIdArray)
-    //     deletedIdArray = this.state.deletedIdArray
-
-    //     if(this.state.className === "modal")
-    //         this.setState({className: "modal show"})
-    //     else
-    //         this.setState({className: "modal"})
-    //     // this.props.deleteUsers()
-    //     // this.setState({deletedIdArray: []})
-    // }
 
     showPopUp = (id) => {
 
@@ -157,108 +203,280 @@ class Users extends Component {
         this.props.changeStatus()
     }
 
+    // filter part =-------
+    handleSort = (e) => {
+        // alert(e.target.value)
+        this.setState({sort: e.target.value})
+    }
+
+    handleFilter = (e) => {
+        // alert(e.target.value)
+        this.setState({filter: e.target.value})
+    }
+
+    handleApply = () => {
+        if(this.state.sort !== "--SELECT--"){
+
+            var today = new Date(),
+            date = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+
+            let temp = this.state.usersData
+            console.log("HELOOOOOO");
+            if(this.state.filter === "Today"){
+
+                temp = temp.filter(user => user.createdDate === date)
+                console.log(temp);
+            }
+
+            else if(this.state.filter === "Yesterday"){
+
+                // get the created day
+                var todayDate = date.split("/")
+
+                var day = todayDate[todayDate.length-1]
+
+                // console.log("hhhhhhh//////", temp[0].createdDate.split("/")[2]);
+           
+                temp = temp.filter(user => parseInt(user.createdDate.split("/")[0]) === parseInt(day-1))
+                console.log(temp);
+                
+            }
+            
+            // sort by name
+            if(this.state.sort === "Name"){
+
+                temp.sort((a,b) => {
+                    if(a.fullName.toLowerCase() < b.fullName.toLowerCase()) { return -1; }
+                    if(a.fullName.toLowerCase() > b.fullName.toLowerCase()) { return 1; }
+                    return 0;
+                }) 
+                console.log(temp)
+
+
+            }
+
+            // sort by email
+            else if(this.state.sort === "Email"){
+
+                temp.sort((a,b) => {
+                    if(a.email.toLowerCase() < b.email.toLowerCase()) { return -1; }
+                    if(a.email.toLowerCase() > b.email.toLowerCase()) { return 1; }
+                    return 0;
+                }) 
+                console.log(temp)
+
+            }
+
+            // sort by contact
+            else if(this.state.sort === "Contact"){
+
+                temp.sort((a,b) => {
+                    if(a.contact.toLowerCase() < b.contact.toLowerCase()) { return -1; }
+                    if(a.contact.toLowerCase() > b.contact.toLowerCase()) { return 1; }
+                    return 0;
+                }) 
+
+                console.log(temp)
+
+            }
+
+
+            // set sorted array
+            this.setState({usersData: temp})
+        }
+    }
+
+    handleClear = () => {
+        alert("Clear")
+        this.setState({
+            sort: "--SELECT--", 
+            filter: "--SELECT--",
+            usersData: this.props.users
+        })
+
+    }
+
+    // footer of pagination table
+    handleRows = (e) => {
+        alert(e.target.value)
+
+        this.setState({rowsPerPage: e.target.value, isLoader: true})
+        isChangedRows = true
+        this.setState({isLoader: false})
+        this.filterUserData(this.props.users.length)
+        
+    }   
+
+    handleNextPage = () => {
+        //alert("next")
+        // console.log(this.state.currentPage);
+        if(this.state.currentPage < this.state.totalPage){
+            let rows = []
+
+            let index = this.state.rowsPerPage*this.state.currentPage
+            for(var i=index; i<(index + this.state.rowsPerPage); i++){
+
+                if(i < this.props.users.length)
+                    rows.push(this.props.users[i])
+            }
+
+            this.setState({
+                currentPage: this.state.currentPage + 1,
+                usersData: rows
+            })
+        }
+    }
+
+    handlePrevPage = () => {
+        //alert("prev")
+        
+        if(this.state.currentPage > 1){
+            isClickedPrev = true
+            this.setState({currentPage: this.state.currentPage - 1 })
+        }
+            
+    
+    }
+
     render() { 
+        console.log("mount", this.state.usersData);
+        console.log("mount1", this.props.users);
         console.log("render");
         // console.log(this.props.users);
         return (
             
             <React.Fragment>
 
-                <div className="user-container">
-                    <div className="users-div">
-                        
-                        <div className="user-card-header">
-
-                            <div className="card-container-header">
-                                <p>Users</p>
-                                <Link to="/dashboard/dashboard-content/action">
-                                    <Button
-                                            btnclass="userAddBtn"
-                                            btnName="Add User"
-                                    />
-                                </Link>
-                            </div>
-
-                            <div className="user-card-container">
-                                <div className="card">
-
-                                    <div className="card-body">
-                                        <h5 className="card-title">All Users</h5>
-
-                                        <div className="circle">
-                                            <div className="card-icon-all">
-                                                <i className="fa fa-users card-icon" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <p className="card-value">{this.state.allUser}</p>
-                                    </div>
-
-                                </div>
-
-                                <div className="card">
-
-                                    <div className="card-body">
-                                        <h5 className="card-title">Active Users</h5>
-                                        
-                                        <div className="circle">
-                                            <div className="card-icon-active">
-                                                <i className="fa fa-check card-icon" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <p className="card-value">{this.state.activeUser}</p>
-                                    </div>
-
-                                </div>
-
-                                <div className="card">
-
-                                    <div className="card-body">
-                                        <h5 className="card-title">Inactive Users</h5>
-                                        
-                                        <div className="circle">
-                                            <div className="card-icon-inactive">
-                                                <i className="fa fa-eye-slash card-icon" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <p className="card-value">{this.state.inactiveUser}</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+              
+                <div className="users-div">
                     
-                        {/* <div className="add-btn-div">
-                                <Link to="/dashboard/dashboard-content/action">
-                                    <Button
+                    <div className="user-card-header">
+
+                        <div className="card-container-header">
+                            <p>Users</p>
+                            <Link to="/dashboard/dashboard-content/action">
+                                <Button
                                         btnclass="userAddBtn"
                                         btnName="Add User"
-                                    />
-                                </Link>
-
-                            {this.state.deletedIdArray.length > 1 &&
-                                <Button
-                                    btnclass="userDeleteBtn"
-                                    btnName="Delete Users"
-                                    dataToggle="modal"
-                                    dataTarget="#staticBackdrop"
-                                    onClick={() => this.showPopUp(-1)}
                                 />
-                            }
-                        </div> */}
+                            </Link>
+                        </div>
 
-                            <UsersTable users={this.props.users} />
+                        <div className="user-card-container">
+                            <div className="card">
 
-                        
-            
-                        {/* {this.props.users.length > 0 ? <PaginationTable 
-                                                            users={this.props.users}
-                                                            onClick={(id) => this.showPopUp(id)}
-                                                            onInputClick={(id) => this.handleClick(id)}
-                                                            onStatus={(id) => this.handleStatus(id)}    
-                                                        /> : <div className="no-user">No User Data Found</div>} */}
+                                <div className="card-body">
+                                    <h5 className="card-title">All Users</h5>
 
+                                    <div className="circle">
+                                        <div className="card-icon-all">
+                                            <i className="fa fa-users card-icon" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <p className="card-value">{this.state.allUser}</p>
+                                </div>
+
+                            </div>
+
+                            <div className="card">
+
+                                <div className="card-body">
+                                    <h5 className="card-title">Active Users</h5>
+                                    
+                                    <div className="circle">
+                                        <div className="card-icon-active">
+                                            <i className="fa fa-check card-icon" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <p className="card-value">{this.state.activeUser}</p>
+                                </div>
+
+                            </div>
+
+                            <div className="card">
+
+                                <div className="card-body">
+                                    <h5 className="card-title">Inactive Users</h5>
+                                    
+                                    <div className="circle">
+                                        <div className="card-icon-inactive">
+                                            <i className="fa fa-eye-slash card-icon" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <p className="card-value">{this.state.inactiveUser}</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <Filter 
+                            sort={this.state.sort}
+                            filter={this.state.filter}
+                            handleSort={(e) => this.handleSort(e)}
+                            handleFilter={(e) => this.handleFilter(e)}
+                            handleApply={this.handleApply}
+                            handleClear={this.handleClear}
+                        />
                     </div>
+                
+
+                    
+
+
+                    {/* <div className="add-btn-div">
+                            <Link to="/dashboard/dashboard-content/action">
+                                <Button
+                                    btnclass="userAddBtn"
+                                    btnName="Add User"
+                                />
+                            </Link>
+
+                        {this.state.deletedIdArray.length > 1 &&
+                            <Button
+                                btnclass="userDeleteBtn"
+                                btnName="Delete Users"
+                                dataToggle="modal"
+                                dataTarget="#staticBackdrop"
+                                onClick={() => this.showPopUp(-1)}
+                            />
+                        }
+                    </div> */}
+
+                    <UsersTable 
+                        users={this.state.usersData}
+                        totalRecords={this.props.users.length} 
+                        rowsPerPage={this.state.rowsPerPage}
+                        currentPage={this.state.currentPage}
+                        totalPage={this.state.totalPage}
+                        onChange={(e) => this.handleRows(e)}
+                        nextPage={this.handleNextPage}
+                        prevPage={this.handlePrevPage}
+                    />
+
+                    
+        
+                    {/* {this.props.users.length > 0 ? <PaginationTable 
+                                                        users={this.props.users}
+                                                        onClick={(id) => this.showPopUp(id)}
+                                                        onInputClick={(id) => this.handleClick(id)}
+                                                        onStatus={(id) => this.handleStatus(id)}    
+                                                    /> : <div className="no-user">No User Data Found</div>} */}
+
+                    { this.state.isLoader && (<div className="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>)}
                 </div>
+               
 
 
                 {/* <div id="myModal" className={this.state.className}>

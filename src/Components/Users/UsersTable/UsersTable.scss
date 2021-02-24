@@ -1,8 +1,7 @@
 .users-table-container{
-    padding: 50px 0px;
     width: 100%;
     background-color: white;
-    overflow-x: scroll;
+    overflow-y: scroll;
     box-shadow: 0 6px 15px rgb(141, 140, 140);
 
     .user-table{
@@ -77,6 +76,11 @@
     }
 }
 
+.all-checkbox{
+    padding-left: 8px;
+    padding-top: 2px;
+}
+
 .action-btn-container{
     
     display: flex;
@@ -139,4 +143,59 @@
     border-radius: 50%;
     padding: 10px;
     
+}
+
+
+.bottom-component-container{
+    position: relative;
+    display: flex;
+    height: 50px;
+
+
+    .bottom-components{
+
+        position: absolute;
+        right: 0;
+        display: flex;
+        align-items: center;
+        padding: 10px 0px;
+
+
+        .component-field{
+            padding-right: 20px;
+
+            label{
+                margin-bottom: 0px !important;
+            }
+
+            .rows-per-page{
+                margin-left: 5px;
+
+                
+            }
+
+            
+        }
+
+        .angle-field{
+
+            padding-right: 10px;
+            display: flex;
+            cursor: pointer;
+
+            .angle-icon{
+                font-size: 14px;
+                background-color: #E4E7EA;
+                border-radius: 50%;
+                height: 30px;
+                width: 30px;
+                margin-right: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+            }
+        }
+    }
+
 }

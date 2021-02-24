@@ -5,7 +5,7 @@ import { instanceOf } from 'prop-types';
 import Button from '../../ReusableComponent/Button';
 import InputTag from '../../ReusableComponent/InputTag';
 import './Profile.scss'
-import { fetchUsers, updateProfile } from '../../Redux/adminAction';
+import {updateProfile} from '../../Redux/adminAction';
 import Previews from '../../Dropzone';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/lib/ReactCrop.scss';
