@@ -149,7 +149,7 @@ class Profile extends Component {
 
                     <div className="form-items">
                         <label>User Name</label> <br></br>
-                        <i className="fa fa-user" aria-hidden="true"></i>
+                        {/* <i className="fa fa-user" aria-hidden="true"></i> */}
                         <InputTag
                             inputClass="inputTag"
                             type="text"
@@ -162,7 +162,7 @@ class Profile extends Component {
 
                     <div className="form-items">
                         <label>Full Name</label> <br></br>
-                        <i className="fa fa-user" aria-hidden="true"></i>
+                        {/* <i className="fa fa-user" aria-hidden="true"></i> */}
                         <InputTag
                             inputClass="inputTag"
                             type="text"
@@ -176,7 +176,7 @@ class Profile extends Component {
                     <div className="form-items">
                         
                         <label>Email</label> <br></br>
-                        <i className="fa fa-envelope" aria-hidden="true"></i>
+                        {/* <i className="fa fa-envelope" aria-hidden="true"></i> */}
                         <InputTag
                             inputClass="inputTag"
                             type="email"

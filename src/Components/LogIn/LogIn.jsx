@@ -142,7 +142,7 @@ class LogIn extends Component {
                             
                                 <label>Username</label>
                                 <br></br>
-                                <i className="fa fa-user" aria-hidden="true"></i>
+                                {/* <i className="fa fa-user" aria-hidden="true"></i> */}
                                 <InputTag 
                                     inputClass="inputTag"
                                     type="text" 
@@ -156,7 +156,7 @@ class LogIn extends Component {
                             <div className="form-item">
                                 <label>Password</label>
                                 <br></br>
-                                <i className="fa fa-key" aria-hidden="true"></i>
+                                {/* <i className="fa fa-key" aria-hidden="true"></i> */}
                                 <InputTag 
                                     inputClass="inputTag"
                                     type="password" 
