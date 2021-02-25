@@ -9,12 +9,14 @@ import {instanceOf} from 'prop-types'
 import PaginationTable from './PaginationTable/PaginationTable';
 import UsersTable from './UsersTable';
 import Filter from './Filter';
+import ReactPopup from '../../ReusableComponent/ReactPopup';
 
 let deleteId = ""
 let changeStatusId
 let deletedIdArray
 let isChangedRows = false
 let isClickedPrev = false
+let index
 
 class Users extends Component {
     
@@ -43,7 +45,12 @@ class Users extends Component {
             totalPage: 0,
 
             // loader
-            isLoader: false
+            isLoader: false,
+            isShowPopup: false,
+            selectAll: false,
+            modelText: "",
+            modelBtnName: ""
+    
         }
 
         console.log(this.state.deletedIdArray);
@@ -60,6 +67,51 @@ class Users extends Component {
 
     componentDidMount(){
         // console.log("mount");
+        let allUser = this.calculateUserCardValues()
+
+        
+
+        this.filterUserData(allUser)
+
+  
+    }
+    
+    componentDidUpdate(){
+       // console.log(this.state.selectAll);
+        if(isChangedRows){
+            isChangedRows = false
+            console.log("DidUpdate..........");
+            let allUser = this.calculateUserCardValues()
+
+            console.log(allUser);
+            if(allUser > 0){
+                this.setState({currentPage: 1})
+            }else{
+                this.setState({currentPage: 0})
+            }
+
+            this.filterUserData(allUser)
+        }
+
+        if(isClickedPrev){
+            isClickedPrev = false
+            let rows = []
+
+            let index = this.state.rowsPerPage*this.state.currentPage
+            for(var i=(index-this.state.rowsPerPage); i<index; i++){
+
+                if(i < this.props.users.length)
+                    rows.push(this.props.users[i])
+            }
+
+            this.setState({
+                usersData: rows
+            })
+        }
+        
+    }
+
+    calculateUserCardValues = () => {
         var allUser = this.props.users.length
         var activeUser=0, inactiveUser=0
         this.props.users.forEach(user => {
@@ -80,36 +132,13 @@ class Users extends Component {
 
         if(allUser > 0){
             this.setState({currentPage: 1})
+        }else{
+            this.setState({currentPage: 0})
         }
 
-        this.filterUserData(allUser)
-
-  
+        return allUser
     }
-    
-    componentDidUpdate(){
-        if(isChangedRows){
-            isChangedRows = false
-            this.filterUserData(this.props.users.length)
-        }
 
-        if(isClickedPrev){
-            isClickedPrev = false
-            let rows = []
-
-            let index = this.state.rowsPerPage*this.state.currentPage
-            for(var i=(index-this.state.rowsPerPage); i<index; i++){
-
-                if(i < this.props.users.length)
-                    rows.push(this.props.users[i])
-            }
-
-            this.setState({
-                usersData: rows
-            })
-        }
-        
-    }
 
     filterUserData(allUser){
         // calculate total page
@@ -131,12 +160,18 @@ class Users extends Component {
         // now set filter array to the userData
         this.setState({usersData: rows})
 
+        if(this.state.usersData.length > 0){
+            this.setState({currentPage: 1})
+        }
+
         return false
     }
 
 
     handleClick = (id) => {
-        console.log(id);
+
+        //this.setState({multiSelectCount: this.state.multiSelectCount + 1})
+       // alert(id);
         let temp = this.state.deletedIdArray
         let index = temp.indexOf(id)
         if(index === -1)
@@ -149,12 +184,10 @@ class Users extends Component {
         // alert(this.state.checkbox + " "+ id)
     }
 
-
-    showPopUp = (id) => {
-
-        if(this.state.className === "modal"){
-            // console.log("show");
-            this.setState({className: "modal show"})
+    showPopUp = (id, modelType) => {
+        console.log(modelType);
+        if(modelType === "delete"){
+            this.setState({isShowPopup: true, modelText: "You will not be able to recover this!", modelBtnName: "Yes, delete it!"})
             if(id !== -1){
                 deleteId = id
                 console.log("single..........", deleteId);
@@ -163,44 +196,71 @@ class Users extends Component {
                 deletedIdArray = this.state.deletedIdArray
             }
         }
-        else
-            this.setState({className: "modal"})
+
+        
+        else if(modelType === "status"){
+
+            changeStatusId = id
+            this.setState({modelBtnName: "Yes, changed it!"})
+             
+            this.state.usersData.map((user, ind) => {
+                if(user.ID === id){
+                    index = ind
+                }
+            })
+
+            if(this.state.usersData[index].status)
+                this.setState({isShowPopup: true, modelText: "User status will be changed to Deactivated"})
+            else
+                this.setState({isShowPopup: true, modelText: "User status will be changed to Activated"})
+
+        }
+        
+      
         
     }
 
     handleDelete = () => {
-    
-        if(deleteId !== ""){
-            let temp = this.state.deletedIdArray
-            let index = temp.indexOf(deleteId)
-            temp.splice(index, 1)
+        
+        if(document.getElementById("modelButton").innerHTML === "Yes, delete it!"){
+            console.log(deleteId);
+            if(deleteId !== ""){
+                let temp = this.state.deletedIdArray
+                let index = temp.indexOf(deleteId)
+                temp.splice(index, 1)
 
-            this.setState({deletedIdArray: temp})
+                this.setState({deletedIdArray: temp})
 
-            this.props.deleteUser()
-            deleteId = ""
-            this.setState({className: "modal"})
-            console.log("....single...", this.state.deletedIdArray.length);
+                this.props.deleteUser()
+                deleteId = ""
+                this.setState({isShowPopup: false})
+                isChangedRows = true
+                console.log("....single...", this.state.deletedIdArray.length);
+            }else{
+                console.log("......all..........", this.state.deletedIdArray.length);
+                this.props.deleteUsers()
+                this.setState({deletedIdArray: []})
+                deletedIdArray = ""
+                isChangedRows = true
+                this.setState({isShowPopup: false})
+                //this.setState({className: "modal"})
+            }
         }else{
-            console.log("......all..........", this.state.deletedIdArray.length);
-            this.props.deleteUsers()
-            this.setState({deletedIdArray: []})
-            deletedIdArray = ""
-            this.setState({className: "modal"})
+           
+            this.props.changeStatus()
+            isChangedRows = true
+            this.setState({isShowPopup: false})
         }
 
     }
 
-    handleClose = () => {
-        console.log(this.state.className);
-        if(this.state.className === "modal show")
-            this.setState({className: "modal"})
+    handleCancel = () => {
+        this.setState({isShowPopup: false})
     }
 
     handleStatus = (id) => {
         //alert("STATUS")
-        changeStatusId = id
-        this.props.changeStatus()
+        
     }
 
     // filter part =-------
@@ -287,7 +347,7 @@ class Users extends Component {
     }
 
     handleClear = () => {
-        alert("Clear")
+       // alert("Clear")
         this.setState({
             sort: "--SELECT--", 
             filter: "--SELECT--",
@@ -298,7 +358,7 @@ class Users extends Component {
 
     // footer of pagination table
     handleRows = (e) => {
-        alert(e.target.value)
+        // alert(e.target.value)
 
         this.setState({rowsPerPage: e.target.value, isLoader: true})
         isChangedRows = true
@@ -336,6 +396,41 @@ class Users extends Component {
         }
             
     
+    }
+
+    deSelectAll = () => {
+        
+
+        // console.log(document.getElementById("select-input").checked);
+        this.state.deletedIdArray.forEach(value => {
+            document.getElementById(value).checked = false
+        })
+
+        // empty deletedIdarray
+        this.setState({deletedIdArray: []})
+        this.setState({multiSelectCount: 0})
+        this.setState({selectAll: false})
+        
+        
+    }
+
+    handleSelectAll = () => {
+
+        let deletedIdArray = []
+        if(!this.state.selectAll){
+
+            this.state.usersData.forEach(user => {
+                document.getElementById(user.ID).checked = true
+                deletedIdArray.push(user.ID)
+                
+            })
+            this.setState({selectAll: true, deletedIdArray})
+        }else{
+            this.state.usersData.forEach(user => {
+                document.getElementById(user.ID).checked = false
+            })
+            this.setState({selectAll: false, deletedIdArray: []})
+        }
     }
 
     render() { 
@@ -419,28 +514,20 @@ class Users extends Component {
                         />
                     </div>
                 
+                    {this.state.deletedIdArray.length > 1 && (
+                        
+                        <div className="multi-select-div">
 
-                    
+                            <p><i className="fa fa-minus-square minus" aria-hidden="true" onClick={this.deSelectAll}></i>{this.state.deletedIdArray.length} row(s) selected.</p>
 
-
-                    {/* <div className="add-btn-div">
-                            <Link to="/dashboard/dashboard-content/action">
-                                <Button
-                                    btnclass="userAddBtn"
-                                    btnName="Add User"
-                                />
-                            </Link>
-
-                        {this.state.deletedIdArray.length > 1 &&
-                            <Button
-                                btnclass="userDeleteBtn"
-                                btnName="Delete Users"
-                                dataToggle="modal"
-                                dataTarget="#staticBackdrop"
+                            <Button 
+                                btnclass="multi-delete-btn"
+                                btnName="Delete"
                                 onClick={() => this.showPopUp(-1)}
                             />
-                        }
-                    </div> */}
+                        </div>
+
+                    ) }
 
                     <UsersTable 
                         users={this.state.usersData}
@@ -448,66 +535,25 @@ class Users extends Component {
                         rowsPerPage={this.state.rowsPerPage}
                         currentPage={this.state.currentPage}
                         totalPage={this.state.totalPage}
+                        selectAll={this.state.selectAll}
                         onChange={(e) => this.handleRows(e)}
                         nextPage={this.handleNextPage}
                         prevPage={this.handlePrevPage}
+                        onInputClick={(id) => this.handleClick(id)}
+                        onClick={(id) => this.showPopUp(id, "delete")}
+                        onSelectAll={this.handleSelectAll}
+                        changeStatus={(id) => this.showPopUp(id, "status")}
                     />
 
-                    
-        
-                    {/* {this.props.users.length > 0 ? <PaginationTable 
-                                                        users={this.props.users}
-                                                        onClick={(id) => this.showPopUp(id)}
-                                                        onInputClick={(id) => this.handleClick(id)}
-                                                        onStatus={(id) => this.handleStatus(id)}    
-                                                    /> : <div className="no-user">No User Data Found</div>} */}
-
-                    { this.state.isLoader && (<div className="lds-ring">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>)}
                 </div>
-               
-
-
-                {/* <div id="myModal" className={this.state.className}>
-
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            
-                            <p>Delete Users</p>
-                            <span className="close" onClick={this.handleClose}>&times;</span>
-                        </div>
-                        <div className="modal-body">
-                            <p>Are you sure You want To Delete?</p>
-                        </div>
-                        <div className="modal-footer">
-                            <div className="footer-btn">
-                                <Button
-                                    btnclass="footer-yes"
-                                    btnName="Yes"
-                                    onClick={() => this.handleDelete()}
-                                />
-
-                                <Button
-                                    btnclass="footer-no"
-                                    btnName="No"
-                                    onClick={() => this.handleClose()}
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                </div> */}
+                
+                <ReactPopup 
+                    open={this.state.isShowPopup}
+                    modelText={this.state.modelText}
+                    modelBtnName={this.state.modelBtnName}
+                    onDelete={this.handleDelete}
+                    onCancel={this.handleCancel}
+                />
 
             </React.Fragment>
 

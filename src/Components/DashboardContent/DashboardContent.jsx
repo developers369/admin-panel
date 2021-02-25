@@ -175,6 +175,8 @@ class DashboardContent extends Component {
         return ( 
             <div className="dashboard-content-div">
                 
+                
+
                 <div className="user-statistics">
                     <div className="user-statistics-header">
                         <i className="fa fa-bar-chart" aria-hidden="true"></i>

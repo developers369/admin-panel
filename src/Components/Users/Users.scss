@@ -14,6 +14,7 @@
     font-size: 14px;
     width: 98%;
     background-color: white;
+    padding-bottom: 10px;
 }
 
 .no-user{
@@ -31,22 +32,27 @@
 
 .card-container-header{
     
-    padding: 10px 10px;
-
+    padding: 15px 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
     p{
         display: inline-block;
         font-size: 20px;
+        margin: 0 !important;
     }
 
     .userAddBtn{
         background-color: #FFFFFF;
         color: #F9B8A4;
         width: 140px;
-        margin-right: 10px;
         border: 2px solid #F9B8A4;
         font-weight: bold;
         outline: none;
-        float: right;
+        position: absolute;
+        top: 6px;
+        right: 10px;
+        height: 40px;
     }
 
 }
@@ -56,12 +62,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 0px;
+    padding: 10px 50px;
 
     .card{
-        width: 30%;
+        width: 32%;
         border: none;
-        margin-left: 10px;
+        margin-right: 15px;
+        // border: 1px solid rgba(184, 181, 181, 0.5);
 
         h5{
             font-size: 16px;
@@ -69,7 +76,7 @@
 
         .card-body{
             padding: 0px !important;
-            padding: 10px 20px !important;
+            //padding: 10px 20px !important;
         }
 
         %style-icon{
@@ -280,6 +287,42 @@ to {top:0; opacity:1}
     }
 }
 
+
+.multi-select-div{
+    height: 62px;
+    background-color: white;
+    box-shadow: 0 6px 15px #8d8c8c;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    border: 1px solid rgba(184, 181, 181, 0.5);
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 10px 50px;
+    // text-align: right;
+
+    p{
+        display: inline-block;
+        margin: 0 !important;
+    }
+    
+    .minus{
+        margin-right: 5px;
+    }
+
+    .multi-delete-btn{
+        border-radius: 4px;
+        width: 80px !important;
+        background-color: white;
+        color: #F7A085;
+        border: 1px solid #F7A085;
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        outline: none;
+    }
+}
 
 
 /* 

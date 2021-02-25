@@ -192,3 +192,26 @@
       width: 82% !important;
   }
 }
+
+.new-header-container{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+
+  h3{
+    padding-left: 10px;
+    display: inline-block;
+    color: #7F7F7F;
+
+  }
+
+  p{
+    margin: 0 !important;
+    padding-right: 10px;
+    color: #FAC5B4;
+    font-size: 20px;
+    font-weight: bold;
+  }
+}

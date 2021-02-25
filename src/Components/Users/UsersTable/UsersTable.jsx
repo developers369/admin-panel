@@ -12,6 +12,7 @@ class UsersTable extends Component {
     }
 
     render() { 
+        console.log(this.props.selectAll);
         return ( 
 
             <div className="users-table-container">
@@ -19,12 +20,12 @@ class UsersTable extends Component {
                     <thead className="table-header">
                         <tr className="header-row">
                             <td>
-                                <div className="all-checkbox" data-tip data-for="select" >
+                                <div className="all-checkbox" data-tip data-for="Select All" >
                                     <InputTag
                                         inputClass="checkbox"
                                         type="checkbox"
-                                        inputText={this.props.checkboxValue}
-                                        // onClick={() => this.props.onInputClick(user.ID)}
+                                        inputText={this.props.selectAll}
+                                        onClick={() => this.props.onSelectAll()}
                                     />
                                 </div>
                             </td>
@@ -45,9 +46,9 @@ class UsersTable extends Component {
                             <td>
                                 <div className="user-action-btn-checkbox" data-tip data-for="select" >
                                     <InputTag
+                                        id={user.ID}
                                         inputClass="checkbox"
                                         type="checkbox"
-                                        inputText={this.props.checkboxValue}
                                         onClick={() => this.props.onInputClick(user.ID)}
                                     />
                                 </div>
@@ -70,11 +71,14 @@ class UsersTable extends Component {
                                         
                                     </div>
 
-                                    <div className="user-action-btn-div" data-tip data-for="status">
+                                    <div className="user-action-btn-div" data-tip data-for="status" onClick={() => this.props.changeStatus(user.ID)}>
                                         <i className="fa fa-check" aria-hidden="true"></i>
                                         <button className="user-action-button-status"></button>
                                     </div>
 
+                                    <ReactTooltip id="Select All" place="top" effect="solid">
+                                        Select All
+                                    </ReactTooltip>
 
                                     <ReactTooltip id="select" place="top" effect="solid">
                                         Select

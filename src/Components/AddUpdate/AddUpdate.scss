@@ -1,0 +1,89 @@
+
+.add-form-container{
+    background-color: #FFFFFF;
+    padding: 15px 30px;
+    // padding-bottom: 40px;
+    .add-form-div{
+        width: 100%;
+
+        p{
+            font-weight: bold;
+
+        }
+
+        .first{
+            font-size: 14px;
+        }
+
+        .second{
+            font-size: 12px;
+        }
+
+        .add-form{
+            display: flex;
+
+            .form-items{
+                padding-right: 25px;
+                width: 100%;
+
+                .form-item{
+                    width: 100%;
+                    padding-top: 20px;
+                    label{
+                        font-size: 12px;
+                    }
+
+                    .container{
+                        width: 100%;
+                        padding: 0px;
+
+                        .dropzone{
+                            width: 100% !important;
+                            outline: none;
+                            padding: 30px;
+                        }
+
+                        .dropText{
+                            font-size: 13px;
+                            text-decoration: none;
+                            font-weight: normal;
+                            vertical-align: middle;
+                            margin: 0px;
+                        }
+                    }
+                    
+                    .form-add-btn{
+                        background-color: #3DA9F3;
+                        color: white;
+                        width: 80px;
+                        border: 1px solid #b8b5b580;
+                        border-radius: 0px;
+                        margin-right: 10px;
+                    }
+
+                    .form-reset-btn{
+                        background-color: #E4E7EA;
+                        color: #7D7D7E;
+                        width: 80px;
+                        border: 1px solid rgba(184, 181, 181, 0.5);
+                        border-radius: 0px;
+                        margin-right: 10px;
+                    }
+
+                    .form-cancel-btn{
+                        background-color: #E4E7EA;
+                        color: #7D7D7E;
+                        width: 80px;
+                        border: 1px solid rgba(184, 181, 181, 0.5);
+                        border-radius: 0px;
+                    }
+
+
+                }
+
+                
+            }
+        }
+    }
+
+}

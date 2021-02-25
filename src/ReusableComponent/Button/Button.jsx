@@ -5,7 +5,7 @@ class Button extends Component {
     render() { 
        
         return ( 
-            <button className={this.props.btnclass} type={this.props.btnType} onClick={this.props.onClick} data-toggle={this.props.dataToggle} data-target={this.props.dataTarget}>{this.props.btnName}</button>
+            <button id={this.props.modelBtnId} className={this.props.btnclass} type={this.props.btnType} onClick={this.props.onClick} data-toggle={this.props.dataToggle} data-target={this.props.dataTarget}>{this.props.btnName}</button>
          );
     }
 }

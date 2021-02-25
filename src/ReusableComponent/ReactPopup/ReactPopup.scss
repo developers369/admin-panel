@@ -1,0 +1,88 @@
+
+.react-model-container{
+    background: white;
+    width: 400px;
+    height: 300px;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.react-modal-overlay{
+    position: fixed;
+    inset: 0px;
+    background-color: rgb(68 66 66 / 45%);
+}
+
+.react-popup-modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    outline: none;
+    height: 300px;
+    width: 400px;
+    background-color: gray;
+    z-index: 1000;
+
+}
+
+.react-model-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.react-model-header{
+
+    .warning-icon-div{
+        border-radius: 50%;
+        padding: 15px 31px;    
+        border: 3px solid orange;
+        width: 85px;
+        margin: 0 auto;
+    }
+
+    i{  
+        color: orange;
+    }
+}
+
+.react-model-content{
+    padding-top: 15px;
+    text-align: center;
+
+    p{
+        padding-top: 10px;
+        font-size: 18px;
+        color: #A9B6BC;
+        font-weight: bold;
+    }
+}
+
+.react-model-buttons{
+    
+    display: flex;
+    justify-content: center;
+
+    .react-model-btn-cancel{
+        border-radius: 0px !important;
+        width: 30% !important;
+        margin-right: 10px;
+        outline: none;
+        color: #868687;
+        background-color: #E4E7EA;
+        cursor: pointer;
+    }
+
+    .react-model-btn-delete{
+        border-radius: 0px !important;
+        width: 50% !important;
+        outline: none;
+        background-color: #F79678;
+        color: white;
+        cursor: pointer;
+    }
+}

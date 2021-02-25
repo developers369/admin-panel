@@ -78,12 +78,12 @@ function Previews(props) {
     <section className="container" style={{border: "1px dashed", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
       <div {...getRootProps({className: 'dropzone'})} style={{width: "120%", textAlign: "center"}}>
         <input {...getInputProps()} />
-        <p style={{marginTop: "12px"}}>Drop Image here</p>
+        <p className="dropText">Drop File Heres to Upload</p>
       </div>
     
-      { props.cropImage !== null && <aside style={thumbsContainer}>
+      {/* { props.cropImage !== null && <aside style={thumbsContainer}>
         {thumbs}
-      </aside>}
+      </aside>} */}
     </section>
   );
 }

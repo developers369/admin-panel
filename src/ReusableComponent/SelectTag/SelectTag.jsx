@@ -17,7 +17,7 @@ class SelectTag extends Component {
                 onChange={this.props.onChange}
             >
                 {
-                    this.props.optionArray.map(option => <option value={option}>{option}</option>) 
+                    this.props.optionArray.map(option => <option key={Math.random()* 100} value={option}>{option}</option>) 
                 }      
             </select>
             

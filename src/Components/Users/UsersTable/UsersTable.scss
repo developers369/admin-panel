@@ -1,8 +1,9 @@
 .users-table-container{
-    width: 100%;
     background-color: white;
     overflow-y: scroll;
     box-shadow: 0 6px 15px rgb(141, 140, 140);
+    margin: 10px 50px;
+    border: 1px solid rgba(184, 181, 181, 0.5);
 
     .user-table{
         width: 100%;

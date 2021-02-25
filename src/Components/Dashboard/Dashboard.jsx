@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Nav from '../Nav'
 import Headerbar from '../Headerbar'
 import './Dashboard.scss'
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Link} from 'react-router-dom'
 import routes from '../../route';
 import {withCookies, Cookies } from 'react-cookie';
 import { instanceOf } from 'prop-types';
@@ -70,6 +70,13 @@ class Dashboard extends Component {
                     <div className="headerbar-div">
                         <i className="fa fa-bars toggle" aria-hidden="true" onClick={this.showNav}></i>
                         <Headerbar onClick={() => this.handleLogOut()}/>
+                    </div>
+
+                    <div className="new-header-container">
+                        <h3>Users</h3>
+                        <Link to='/dashboard/dashboard-content/users' style={{textDecoration: "none"}}>
+                            <p>Users</p>
+                        </Link>
                     </div>
 
                     <div className="dashboard-container">
