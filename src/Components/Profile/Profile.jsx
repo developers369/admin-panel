@@ -9,6 +9,7 @@ import {updateProfile} from '../../Redux/adminAction';
 import Previews from '../../Dropzone';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/lib/ReactCrop.scss';
+import { NewHeader } from '../Dashboard/Dashboard';
 
 
 let fullName, email, profileImg
@@ -142,116 +143,118 @@ class Profile extends Component {
     render() { 
         return ( 
 
+            <>
+                <NewHeader />
+                <div className="profile-div">
+                    <form className="profile-form">
+                        <h2>Admin Profile</h2>
 
-            <div className="profile-div">
-                <form className="profile-form">
-                    <h2>Admin Profile</h2>
-
-                    <div className="form-items">
-                        <label>User Name</label> <br></br>
-                        {/* <i className="fa fa-user" aria-hidden="true"></i> */}
-                        <InputTag
-                            inputClass="inputTag"
-                            type="text"
-                            inputText={this.state.userName}
-                            disabled={true}
-                        />
-                        
-                    </div>
-
-
-                    <div className="form-items">
-                        <label>Full Name</label> <br></br>
-                        {/* <i className="fa fa-user" aria-hidden="true"></i> */}
-                        <InputTag
-                            inputClass="inputTag"
-                            type="text"
-                            inputText={this.state.fullName}
-                            placeHolder="Enter full name"
-                            onChange={(e) => this.handleChange(e, "fullName")}
-                        />
-                        
-                    </div>
-            
-                    <div className="form-items">
-                        
-                        <label>Email</label> <br></br>
-                        {/* <i className="fa fa-envelope" aria-hidden="true"></i> */}
-                        <InputTag
-                            inputClass="inputTag"
-                            type="email"
-                            inputText={this.state.email}
-                            placeHolder="Enter email"
-                            onChange={(e) => this.handleChange(e, "email")}
-                        />
-                    </div>
-
-                    
-                    
-
-                    <div className="form-items">
-                        {/* <label className="label-profile-img">Profile Image<sup style={{color: "red"}}>*</sup></label> <br></br>
-
-                        {this.state.profileImg && <div className="img-preview" style={{width : "50px", height : "50px", marginBottom : "0px"}}>
+                        <div className="form-items">
+                            <label>User Name</label> <br></br>
+                            {/* <i className="fa fa-user" aria-hidden="true"></i> */}
+                            <InputTag
+                                inputClass="inputTag"
+                                type="text"
+                                inputText={this.state.userName}
+                                disabled={true}
+                            />
                             
-                            <img src={this.state.profileImg === null ? "" : this.state.profileImg} alt="Profile" style={{width : "100%", height: "auto"}}/>
-                        </div>}
-                        <InputTag
-                            inputClass="inputTagFile"
-                            type="file"
-                            onChange={(e) => this.handleChange(e, "file")}
-                        /> */}
-                        <Previews 
-                            passFile={this.handleFile} 
-                            cropImage={this.state.profileImg}
-                        />
-                        {/* <input id="i" type="file" onChange={this.handleFile}/> */}
-                    </div>
+                        </div>
 
 
-                    <div className="profile-button-div">
-
-                        <Button
-                            btnclass="profile-action-button"
-                            btnName="Update"
-                            onClick={(e) => this.handleClick(e)}
-                        />
-
-                    </div>
-                </form>
-
-              
-                <div id="popUpModal" className="modal">
-
-                    <div className="modal-content">
-                        <div className="modal-header">
+                        <div className="form-items">
+                            <label>Full Name</label> <br></br>
+                            {/* <i className="fa fa-user" aria-hidden="true"></i> */}
+                            <InputTag
+                                inputClass="inputTag"
+                                type="text"
+                                inputText={this.state.fullName}
+                                placeHolder="Enter full name"
+                                onChange={(e) => this.handleChange(e, "fullName")}
+                            />
                             
-                            <p>Crop Image</p>
-                            <span className="close" onClick={() => document.getElementById("popUpModal").style.display="none"}>&times;</span>
                         </div>
-                        <div className="modal-body">
-                            <ReactCrop src={this.state.profileImg} onImageLoaded={this.onLoad} crop={this.state.crop} onChange={this.handleCrop} />
+                
+                        <div className="form-items">
+                            
+                            <label>Email</label> <br></br>
+                            {/* <i className="fa fa-envelope" aria-hidden="true"></i> */}
+                            <InputTag
+                                inputClass="inputTag"
+                                type="email"
+                                inputText={this.state.email}
+                                placeHolder="Enter email"
+                                onChange={(e) => this.handleChange(e, "email")}
+                            />
                         </div>
-                        <div className="modal-footer">
-                            <div className="footer-btn">
-                                <Button
-                                    btnclass="footer-crop"
-                                    btnName="Crop Image"
-                                    onClick={this.makeCrop}
-                                />
 
-                                <Button
-                                    btnclass="footer-cancel"
-                                    btnName="Cancel"
-                                    onClick={() => document.getElementById("popUpModal").style.display="none"}
-                                />
+                        
+                        
+
+                        <div className="form-items">
+                            {/* <label className="label-profile-img">Profile Image<sup style={{color: "red"}}>*</sup></label> <br></br>
+
+                            {this.state.profileImg && <div className="img-preview" style={{width : "50px", height : "50px", marginBottom : "0px"}}>
+                                
+                                <img src={this.state.profileImg === null ? "" : this.state.profileImg} alt="Profile" style={{width : "100%", height: "auto"}}/>
+                            </div>}
+                            <InputTag
+                                inputClass="inputTagFile"
+                                type="file"
+                                onChange={(e) => this.handleChange(e, "file")}
+                            /> */}
+                            <Previews 
+                                passFile={this.handleFile} 
+                                cropImage={this.state.profileImg}
+                            />
+                            {/* <input id="i" type="file" onChange={this.handleFile}/> */}
+                        </div>
+
+
+                        <div className="profile-button-div">
+
+                            <Button
+                                btnclass="profile-action-button"
+                                btnName="Update"
+                                onClick={(e) => this.handleClick(e)}
+                            />
+
+                        </div>
+                    </form>
+
+                
+                    <div id="popUpModal" className="modal">
+
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                
+                                <p>Crop Image</p>
+                                <span className="close" onClick={() => document.getElementById("popUpModal").style.display="none"}>&times;</span>
+                            </div>
+                            <div className="modal-body">
+                                <ReactCrop src={this.state.profileImg} onImageLoaded={this.onLoad} crop={this.state.crop} onChange={this.handleCrop} />
+                            </div>
+                            <div className="modal-footer">
+                                <div className="footer-btn">
+                                    <Button
+                                        btnclass="footer-crop"
+                                        btnName="Crop Image"
+                                        onClick={this.makeCrop}
+                                    />
+
+                                    <Button
+                                        btnclass="footer-cancel"
+                                        btnName="Cancel"
+                                        onClick={() => document.getElementById("popUpModal").style.display="none"}
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
+                
                 </div>
-               
-            </div>
+            </>
 
         );
     }

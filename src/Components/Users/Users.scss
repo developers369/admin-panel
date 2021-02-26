@@ -324,43 +324,40 @@ to {top:0; opacity:1}
     }
 }
 
-
 /* 
   ##Device = Most of the Smartphones Mobiles (Portrait)
   ##Screen = B/w 320px to 479px
 */
 
 @media (min-width: 320px) and (max-width: 480px) {
-    
-    .users-div{
-        width: 100% !important;
-        
-        
-        td{
-            width: 100vh;
-            text-align: center;
 
-        }
-    }
+    .user-card-container{
    
-
-    .dataTables_wrapper{
-        width: 100% !important;
-
+        flex-direction: column;
+        padding: 10px 20px !important;
     }
 
-    .row{
-        margin: 0px !important;
-        overflow-x: scroll;
-    
-        div{
-            padding: 0px !important;
-        }
+    .card{
+        width: 90% !important;
     }
 
-    #myModal{
-        .modal-content{
-            width: 80% !important;
+    .filter-container{
+        padding: 10px 20px !important;
+    }
+
+    .users-table-container{
+        margin: 10px 20px !important;
+    }
+
+    .bottom-components{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 10px 0px !important;
+
+        .component-field{
+            padding-left: 10px !important;
+            padding-right: 0px !important;
         }
     }
 }
@@ -371,48 +368,72 @@ to {top:0; opacity:1}
 */
 
 @media (min-width: 481px) and (max-width: 767px) {
-  
-    /* CSS */
-    .users-div{
-        width: 100% !important;
-        overflow-x: scroll;
 
-        
-    }
-    .table{
-        display: flex;
+    .user-card-container{
+   
         flex-direction: column;
-        width: 100% !important;
+        padding: 10px 20px !important;
     }
+
+    .card{
+        width: 90% !important;
+    }
+
+    .filter-container{
+        padding: 10px 20px !important;
+    }
+
+    .users-table-container{
+        margin: 10px 20px !important;
+    }
+
+    .bottom-components{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 10px 0px !important;
+
+        .component-field{
+            padding-left: 10px !important;
+            padding-right: 0px !important;
+        }
+    }
+
     
-    .dataTables_wrapper{
-        width: 100% !important;
-    }
 
-    .row{
-        margin: 0px !important;
-        overflow-x: scroll;
-        div{
-            padding: 0px !important;
-        }
-    }
-
-    #myModal{
-        .modal-content{
-            width: 80% !important;
-        }
-    }
-  }
-  
+}
 
 /* 
-  ##Device = Tablets, Ipads (landscape)
-  ##Screen = B/w 768px to 1024px
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
 */
 
-@media (min-width: 768px) and (max-width: 1024px) {
-
-    .users-div{
-        width: 97% !important;
-    }
-}
+@media (min-width: 1281px) {
+  
+    /* CSS */
+    // .users-div{
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     width: 80%;
+    // }
+  }
+  
+  /* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+  
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    /* CSS */
+    // .users-div{
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     width: 80%;
+    // }
+    
+  }

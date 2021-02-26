@@ -10,6 +10,7 @@ import PaginationTable from './PaginationTable/PaginationTable';
 import UsersTable from './UsersTable';
 import Filter from './Filter';
 import ReactPopup from '../../ReusableComponent/ReactPopup';
+import { NewHeader } from '../Dashboard/Dashboard';
 
 let deleteId = ""
 let changeStatusId
@@ -442,7 +443,7 @@ class Users extends Component {
             
             <React.Fragment>
 
-              
+                <NewHeader />
                 <div className="users-div">
                     
                     <div className="user-card-header">
@@ -549,8 +550,12 @@ class Users extends Component {
                 
                 <ReactPopup 
                     open={this.state.isShowPopup}
+                    iconDivClass="warning-delete-div"
+                    iconName="fa fa-exclamation fa-3x"
+                    modelHeaderText="Are You Sure!"
                     modelText={this.state.modelText}
                     modelBtnName={this.state.modelBtnName}
+                    modalPositiveBtn="react-model-btn-delete"
                     onDelete={this.handleDelete}
                     onCancel={this.handleCancel}
                 />

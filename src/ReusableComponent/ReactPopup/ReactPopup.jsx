@@ -24,14 +24,14 @@ class ReactPopup extends Component {
 
                     
                         <div className="react-model-header">
-                            <div className="warning-icon-div">
-                                <i className="fa fa-exclamation fa-3x" aria-hidden="true"></i>
+                            <div className={this.props.iconDivClass}>
+                                <i className={this.props.iconName} aria-hidden="true"></i>
                             </div>
                             
                         </div>
 
                         <div className="react-model-content">
-                            <h3>Are you Sure?</h3>
+                            <h3>{this.props.modelHeaderText}</h3>
                             <p>{this.props.modelText}</p>
                         </div>
 
@@ -46,7 +46,7 @@ class ReactPopup extends Component {
 
                                 <Button 
                                     modelBtnId="modelButton"
-                                    btnclass="react-model-btn-delete"
+                                    btnclass={this.props.modalPositiveBtn}
                                     btnName={this.props.modelBtnName}
                                     onClick={this.props.onDelete}
                                 />

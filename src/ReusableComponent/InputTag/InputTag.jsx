@@ -19,6 +19,7 @@ class InputTag extends Component {
                 value={this.props.inputText} 
                 placeholder={this.props.placeHolder} 
                 onChange={this.props.onChange} 
+                onKeyUp={this.props.onKeyUp}
                 disabled={this.props.disabled} 
                 onClick={this.props.onClick}
                 name={this.props.name}

@@ -8,6 +8,26 @@ import {withCookies, Cookies } from 'react-cookie';
 import { instanceOf } from 'prop-types';
 import Footer from '../Footer/Footer';
 
+export const NewHeader = (props) => {
+    return(
+        <div className="new-header-container">
+
+            <div className="header-left">
+                <h3>Users</h3>
+            </div>
+
+            <div className="header-right">
+                <Link to='/dashboard/dashboard-content/users' style={{textDecoration: "none"}}>
+                    <p className="redirect-user">Users </p>
+                </Link>
+                <p className="slash">{props.slash}</p>
+                <p className="form-name">{props.formName}</p>
+            </div>
+
+            </div>
+    )
+}
+
 class Dashboard extends Component {
     static propTypes = {
         cookies: instanceOf(Cookies).isRequired
@@ -55,6 +75,7 @@ class Dashboard extends Component {
     }
 
     render() { 
+        console.log(".....header render...", window.location.pathname);
         return ( 
             <div className="admin-panel">
 
@@ -72,12 +93,8 @@ class Dashboard extends Component {
                         <Headerbar onClick={() => this.handleLogOut()}/>
                     </div>
 
-                    <div className="new-header-container">
-                        <h3>Users</h3>
-                        <Link to='/dashboard/dashboard-content/users' style={{textDecoration: "none"}}>
-                            <p>Users</p>
-                        </Link>
-                    </div>
+                    
+                    
 
                     <div className="dashboard-container">
                         

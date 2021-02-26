@@ -9,6 +9,7 @@ import LineChartP from '../../LineChartP';
 import PieRechart from '../../PieRechart';
 import GoogleMap from '../../GoogleMap';
 import { fetchUsers } from '../../Redux/adminAction';
+import { NewHeader } from '../Dashboard/Dashboard';
 
 
 
@@ -173,205 +174,209 @@ class DashboardContent extends Component {
 
     render() { 
         return ( 
-            <div className="dashboard-content-div">
-                
-                
 
-                <div className="user-statistics">
-                    <div className="user-statistics-header">
-                        <i className="fa fa-bar-chart" aria-hidden="true"></i>
-                        <p>User Statistics</p>
-
-
-                        <i className="fa fa-calendar calender" aria-hidden="true" data-tip data-for="calender" onClick={this.showFilter}></i>
-                        
-                        <div id="filter-div" onClick={this.removeFilter}>
-                            <i className="fa fa-filter" aria-hidden="true" data-tip data-for="filter"></i>
-                            <i className="fa fa-times filter-close" aria-hidden="true"></i>
-                        </div>
-
-                        <ReactTooltip id="calender" place="bottom" effect="solid">
-                            Edit
-                        </ReactTooltip>
-
-                        <ReactTooltip id="filter" place="top" effect="solid">
-                            Remove Filter
-                        </ReactTooltip>
-                    </div>
-
-                    <div className="card-container">
-                        <div className="padding">
-                            <div className="card">
-
-                                <div className="card-body">
-                                    <h5 className="card-title">All Users</h5>
-
-                                    <div className="pulsating-circle">
-                                        <div className="card-icon-all">
-                                            <i className="fa fa-users card-icon" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <p className="card-value">{this.state.allUser}</p>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div className="padding">
-                            <div className="card">
-
-                                <div className="card-body">
-                                    <h5 className="card-title">Active Users</h5>
-                                    
-                                    <div className="pulsating-circle">
-                                        <div className="card-icon-active">
-                                            <i className="fa fa-check card-icon" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <p className="card-value">{this.state.activeUser}</p>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div className="padding">
-                            <div className="card">
-
-                                <div className="card-body">
-                                    <h5 className="card-title">Inactive Users</h5>
-                                    
-                                    <div className="pulsating-circle">
-                                        <div className="card-icon-inactive">
-                                            <i className="fa fa-eye-slash card-icon" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <p className="card-value">{this.state.inactiveUser}</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="user-statistics second-header">
-                    <div className="user-statistics-header">
-                        <i className="fa fa-bar-chart" aria-hidden="true"></i>
-                        <p>Charts</p>
-
-                        <ReactTooltip id="filter" place="top" effect="solid">
-                            Remove Filter
-                        </ReactTooltip>
-                    </div>
-
-                    <div className="linechart-margin">
-
+            <>
+                <NewHeader />
+                <div className="dashboard-content-div">
                     
-                        <div className="linechart-div">
-                            <p>Review Of User statistics based on date</p>
-                            {this.props.users.length > 0 ? <LineChartP users={this.props.users} /> : <p>No User Found</p>}
-                        </div>
                     
-                        <div className="piechart-div">
-                            <p>Active/InActive users</p>
-                            { this.props.users.length > 0 ? <PieRechart users={this.props.users} /> : <p>No User Found</p>}
-                        </div>
-                    
-                    </div>
 
-                    <div className="map-div">
-                        <div className="google-map-container">
-                            <GoogleMap  />
-                        </div>
+                    <div className="user-statistics">
+                        <div className="user-statistics-header">
+                            <i className="fa fa-bar-chart" aria-hidden="true"></i>
+                            <p>User Statistics</p>
 
-                        <div className="salary-chart">
-                            <p>Review Of User statistics based on Salary</p>
-                            { this.props.users.length > 0 ? <SalaryChart users={this.props.users}/> : <p>No User Found</p>}
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="filter-modal" className="card filter-card">
 
-                    <div className="card-body">
-
-                        <div className="filter-header">
-                            <h5 className="card-title">FILTERS</h5>
-
-                            <span className="close" onClick={this.closeFilter}>&times;</span>
-                        </div>
-                        <div className="filter-card-content">
-
-                            <p>Filter Types</p>
-
-                            <div className="radio-div">
-                                
-                                <InputTag
-                                    id="today"
-                                    inputClass="radio"
-                                    type="radio"
-                                    name="filter"
-                                    onClick={() => this.handleFilter("today")}
-                                />
-                                <label>Today</label>
-                            </div>
-
-                            <div className="radio-div">
-                                <InputTag
-                                    id="yesterday"
-                                    inputClass="radio"
-                                    type="radio"
-                                    name="filter"
-                                    onClick={() => this.handleFilter("yesterday")}
-                                />
-                                <label>Yesterday</label>
-                            </div>
-
-                            <div className="radio-div">
-                                <InputTag
-                                    id="last7"
-                                    inputClass="radio"
-                                    type="radio"
-                                    name="filter"
-                                    onClick={() => this.handleFilter("last7")}
-                                />
-                                <label>Last 7 days</label>
-                            </div>
+                            <i className="fa fa-calendar calender" aria-hidden="true" data-tip data-for="calender" onClick={this.showFilter}></i>
                             
+                            <div id="filter-div" onClick={this.removeFilter}>
+                                <i className="fa fa-filter" aria-hidden="true" data-tip data-for="filter"></i>
+                                <i className="fa fa-times filter-close" aria-hidden="true"></i>
+                            </div>
 
+                            <ReactTooltip id="calender" place="bottom" effect="solid">
+                                Edit
+                            </ReactTooltip>
+
+                            <ReactTooltip id="filter" place="top" effect="solid">
+                                Remove Filter
+                            </ReactTooltip>
                         </div>
-                    </div>
 
-                </div>
+                        <div className="card-container">
+                            <div className="padding">
+                                <div className="card">
 
+                                    <div className="card-body">
+                                        <h5 className="card-title">All Users</h5>
 
+                                        <div className="pulsating-circle">
+                                            <div className="card-icon-all">
+                                                <i className="fa fa-users card-icon" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <p className="card-value">{this.state.allUser}</p>
+                                    </div>
 
-                {/* <div className="dashboard-cards">
-                    <div className="total-users">
-                        <div className="progress blue"> <span className="progress-left"> <span className="progress-bar"></span> </span> <span className="progress-right"> <span className="progress-bar"></span> </span>
-                            <div className="progress-value">{this.props.users.length}</div>
-                        </div>
-                        <p>Total Users</p>
-                    </div>
+                                </div>
+                            </div>
 
-                    <div className="total-salary">
-                        <div className="progress blue"> <span className="progress-left"> <span className="progress-bar"></span> </span> <span className="progress-right"> <span className="progress-bar"></span> </span>
-                            <div className="progress-value">
-                                {this.props.users.length > 0 ? "$"+this.props.users.reduce(function(acc, user) { return acc + parseInt(user.salary)},0) : 0}
-                                
+                            <div className="padding">
+                                <div className="card">
+
+                                    <div className="card-body">
+                                        <h5 className="card-title">Active Users</h5>
+                                        
+                                        <div className="pulsating-circle">
+                                            <div className="card-icon-active">
+                                                <i className="fa fa-check card-icon" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <p className="card-value">{this.state.activeUser}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div className="padding">
+                                <div className="card">
+
+                                    <div className="card-body">
+                                        <h5 className="card-title">Inactive Users</h5>
+                                        
+                                        <div className="pulsating-circle">
+                                            <div className="card-icon-inactive">
+                                                <i className="fa fa-eye-slash card-icon" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <p className="card-value">{this.state.inactiveUser}</p>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                        <p>Total Salary</p>
                     </div>
-                </div>
 
-                <div className="column-chart">
-                     <SalaryChart></SalaryChart>
-                </div>
+                    <div className="user-statistics second-header">
+                        <div className="user-statistics-header">
+                            <i className="fa fa-bar-chart" aria-hidden="true"></i>
+                            <p>Charts</p>
 
-                <div className="image-carousel">
-                   <ImageCarousel users={this.props.users}/>
-                </div> */}
-            </div>
+                            <ReactTooltip id="filter" place="top" effect="solid">
+                                Remove Filter
+                            </ReactTooltip>
+                        </div>
+
+                        <div className="linechart-margin">
+
+                        
+                            <div className="linechart-div">
+                                <p>Review Of User statistics based on date</p>
+                                {this.props.users.length > 0 ? <LineChartP users={this.props.users} /> : <p>No User Found</p>}
+                            </div>
+                        
+                            <div className="piechart-div">
+                                <p>Active/InActive users</p>
+                                { this.props.users.length > 0 ? <PieRechart users={this.props.users} /> : <p>No User Found</p>}
+                            </div>
+                        
+                        </div>
+
+                        <div className="map-div">
+                            <div className="google-map-container">
+                                <GoogleMap  />
+                            </div>
+
+                            <div className="salary-chart">
+                                <p>Review Of User statistics based on Salary</p>
+                                { this.props.users.length > 0 ? <SalaryChart users={this.props.users}/> : <p>No User Found</p>}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="filter-modal" className="card filter-card">
+
+                        <div className="card-body">
+
+                            <div className="filter-header">
+                                <h5 className="card-title">FILTERS</h5>
+
+                                <span className="close" onClick={this.closeFilter}>&times;</span>
+                            </div>
+                            <div className="filter-card-content">
+
+                                <p>Filter Types</p>
+
+                                <div className="radio-div">
+                                    
+                                    <InputTag
+                                        id="today"
+                                        inputClass="radio"
+                                        type="radio"
+                                        name="filter"
+                                        onClick={() => this.handleFilter("today")}
+                                    />
+                                    <label>Today</label>
+                                </div>
+
+                                <div className="radio-div">
+                                    <InputTag
+                                        id="yesterday"
+                                        inputClass="radio"
+                                        type="radio"
+                                        name="filter"
+                                        onClick={() => this.handleFilter("yesterday")}
+                                    />
+                                    <label>Yesterday</label>
+                                </div>
+
+                                <div className="radio-div">
+                                    <InputTag
+                                        id="last7"
+                                        inputClass="radio"
+                                        type="radio"
+                                        name="filter"
+                                        onClick={() => this.handleFilter("last7")}
+                                    />
+                                    <label>Last 7 days</label>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    {/* <div className="dashboard-cards">
+                        <div className="total-users">
+                            <div className="progress blue"> <span className="progress-left"> <span className="progress-bar"></span> </span> <span className="progress-right"> <span className="progress-bar"></span> </span>
+                                <div className="progress-value">{this.props.users.length}</div>
+                            </div>
+                            <p>Total Users</p>
+                        </div>
+
+                        <div className="total-salary">
+                            <div className="progress blue"> <span className="progress-left"> <span className="progress-bar"></span> </span> <span className="progress-right"> <span className="progress-bar"></span> </span>
+                                <div className="progress-value">
+                                    {this.props.users.length > 0 ? "$"+this.props.users.reduce(function(acc, user) { return acc + parseInt(user.salary)},0) : 0}
+                                    
+                                </div>
+                            </div>
+                            <p>Total Salary</p>
+                        </div>
+                    </div>
+
+                    <div className="column-chart">
+                        <SalaryChart></SalaryChart>
+                    </div>
+
+                    <div className="image-carousel">
+                    <ImageCarousel users={this.props.users}/>
+                    </div> */}
+                </div>
+            </>
          );
     }
 }
